@@ -5,7 +5,10 @@ import { FormsModule }   from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HomeComponent } from './Component/home/home.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { HttpModule } from '@angular/http';
 
+import { HttpCallsService } from './services/httpservice.service';
+import { DataService } from './services/dataservice.service';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
@@ -18,13 +21,13 @@ import { UserNavComponent } from './Component/user-nav/user-nav.component';
     AppComponent, HomeComponent, DashboardComponent, ProfileComponent, UserNavComponent
   ],
   imports: [
-    BrowserModule,FormsModule,RouterModule.forRoot([
+    BrowserModule, FormsModule, HttpModule,RouterModule.forRoot([
       { path:'dashboard',component:DashboardComponent },
       { path:'profile',component:ProfileComponent },
       { path:'**',component:HomeComponent }
     ]),ModalModule.forRoot()
   ],
-  providers: [],
+  providers: [HttpCallsService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

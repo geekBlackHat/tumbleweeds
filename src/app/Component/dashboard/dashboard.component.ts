@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpCallsService } from './../../services/httpservice.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -24,9 +25,14 @@ export class DashboardComponent implements OnInit {
     ]
   };
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private httpCalls: HttpCallsService) { }
 
   ngOnInit() {
+    this.httpCalls.getAllItems('http://xrp-backend-tumbleweed-backend.7e14.starter-us-west-2.openshiftapps.com/pingAPI').subscribe(
+      res => {
+        console.log(res);
+      }
+    );
   }
 
   profile(){
