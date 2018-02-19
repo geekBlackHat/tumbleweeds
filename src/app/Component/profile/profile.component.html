@@ -1,8 +1,71 @@
-<p>
-  profile works!
-</p>
-<ul>
-  <li >
-   {{profile.FirstName}} - {{profile.LastName}} - {{profile.Email}}
-  </li>
-</ul>
+<app-user-nav></app-user-nav>
+<div class="container" style="margin-top:65px;">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <h5>Personal Information</h5>
+                <div class="row">
+                    <div class="col-xs-6">Name</div>
+                    <div class="col-xs-6">{{profile.FirstName + profile.LastName}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">Email</div>
+                    <div class="col-xs-6">{{profile.Email}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">Mobile No</div>
+                    <div class="col-xs-6">{{profile.MobileNumber}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <h5>Balances</h5>
+                <div class="row">
+                    <div class="col-xs-6">INR Balance</div>
+                    <div class="col-xs-6">Rs. 20000</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">BTC Balance</div>
+                    <div class="col-xs-6">0.20000</div>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="row">
+        <button>Deposit BTC</button>
+        <button>Withdraw BTC</button>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <h5>Trading History</h5>
+                <div class="row">
+                    <div class="col-xs-6">Name</div>
+                    <div class="col-xs-6">{{profile.FirstName + profile.LastName}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">Email</div>
+                    <div class="col-xs-6">{{profile.Email}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">Mobile No</div>
+                    <div class="col-xs-6">{{profile.MobileNumber}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <h5>BTC Transaction History</h5>
+                <div class="row">
+                    <div class="col-xs-6">INR Balance</div>
+                    <div class="col-xs-6">Rs. 20000</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">BTC Balance</div>
+                    <div class="col-xs-6">0.20000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

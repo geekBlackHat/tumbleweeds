@@ -1,5 +1,141 @@
-<p>
-  dashboard works!
-</p>
+<app-user-nav></app-user-nav>
 <br />
-<a (click)="profile()">Profile</a>
+<div class="ticker-list">
+  <ul>
+    <li><b>BTC/INR:</b> 7,02,000.00</li>
+    <li>|</li>
+    <li><b> ETH/INR:</b> 62,151.00</li>
+    <li><b> XRP/INR:</b> 73.27</li> 
+    <li><b>LTC/INR:</b> 14,665.00</li> 
+    <li><b>BCH/INR:</b> 99,900.00</li> 
+    <li><b>GNT/INR:</b> 27.45</li> 
+    <li><b>MIOTA/INR:</b> 133.31</li>
+    <li><b>OMG/INR:</b> 1,076.27</li>
+  </ul>   
+</div>
+<div class="container-fluid">
+  <div class="row" style="background-color: #273548; padding:10px;">
+    <div class="col-sm-4 credentials-form buy-section">
+      <h4 align="center">Buy</h4>
+      <div>
+        <div>
+          <input type="text" placeholder="amount BTC" />
+        </div>
+        <div>
+          <input type="text" placeholder="price/BTC" />
+        </div>
+        <div>
+          <span class="trade-pricing">Rs. 19000</span>
+          <input class="signup-btn" type="button" value="Buy" />          
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 credentials-form sell-section">
+      <h4 align="center">Sell</h4>
+      <div>
+        <div>
+          <input type="text" placeholder="amount BTC" />
+        </div>
+        <div>
+          <input type="text" placeholder="price/BTC" />
+        </div>
+        <div>
+          <span class="trade-pricing">Rs. 19000</span>
+          <input class="signup-btn" type="button" value="Buy" />          
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 credentials-form pending-section">
+      <h4 align="center">Pending Orders</h4>
+      <div>
+        <div style="min-height:97px;">
+          <div class="row">
+            <div class="col-xs-4 col-mod-5">0.0023 BTC</div>
+            <div class="col-xs-4 col-mod-5" style="text-align:center;"> Rs.130000</div>
+            <div class="col-xs-4 col-mod-5" style="text-align:right;"> cancel</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4 col-mod-5">0.0023 BTC</div>
+            <div class="col-xs-4 col-mod-5" style="text-align:center;"> Rs.130000</div>
+            <div class="col-xs-4 col-mod-5" style="text-align:right;"> cancel</div>
+          </div>
+        </div>
+        <div>
+          <span class="trade-pricing">Rs. 19000</span>
+          <span class="inr-balance">2.0 BTC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row trading-details">
+    <div class="col-xs-6 col-sm-3 buy-section-ticker">
+      <h5>Buy Orders</h5>
+      <table style="width:100%">
+        <thead>
+          <tr>
+            <th style="width:50%">Volume</th>
+            <th style="width:50%">INR/BTC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trade of tickerAPIResults.buy_orders; let i = index;" [ngClass]="{'tr-odd':(i%2 != 0)}">
+            <td style="width:50%">{{trade.vol}}</td>
+            <td style="width:50%">{{trade.price}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-6 col-sm-3 sell-section-ticker">
+      <h5>Sell Orders</h5>
+      <table style="width:100%">
+        <thead>
+          <tr>
+            <th style="width:50%">Volume</th>
+            <th style="width:50%">INR/BTC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trade of tickerAPIResults.buy_orders; let i = index" [ngClass]="{'tr-odd':(i%2 != 0)}">
+            <td style="width:50%">{{trade.vol}}</td>
+            <td style="width:50%">{{trade.price}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-6 col-sm-3 market-trade-ticker">
+      <h5>Market Trade History </h5>
+      <table style="width:100%">
+        <thead>
+          <tr>
+            <th style="width:50%">Volume</th>
+            <th style="width:50%">INR/BTC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trade of tickerAPIResults.buy_orders; let i = index" [ngClass]="{'tr-odd':(i%2 != 0)}">
+            <td style="width:50%">{{trade.vol}}</td>
+            <td style="width:50%">{{trade.price}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-6 col-sm-3 your-trade-ticker">
+      <h5>Your Trade History</h5>
+      <table style="width:100%">
+        <thead>
+          <tr>
+            <th style="width:50%">Volume</th>
+            <th style="width:50%">INR/BTC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trade of tickerAPIResults.buy_orders; let i = index" [ngClass]="{'tr-odd':(i%2 != 0)}">
+            <td style="width:50%">{{trade.vol}}</td>
+            <td style="width:50%">{{trade.price}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

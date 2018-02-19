@@ -1,0 +1,151 @@
+
+h5{
+    text-align: center;
+}
+
+.ticker-list{
+    margin-top: 40px;
+    border-bottom: 1px solid #377db8;
+}
+
+.ticker-list ul li{
+    display: inline-block;
+    font-size:10px;
+    margin-right: 10px;
+}
+
+.ticker-list ul li b{
+    color: #337ab7;
+}
+
+.signup-btn{
+    height: 35px;
+    margin-top: 25px !important;
+    max-width: 120px;
+    color: #fff;
+    border:none;
+}
+
+.buy-section, .sell-section{
+    border-right: 1px solid #1a4378
+}
+
+.buy-section .credentials-form input{
+    width: 100%;
+    margin: 10px 0px;
+    padding: 3px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #59a530 !important;
+    color:#fff;
+}
+
+.buy-section .signup-btn{
+    background-color: #59a530 !important;
+}
+
+.buy-section .credentials-form h3{
+    color:#59a530;
+}
+
+.buy-section h4{
+    color:#59a530;
+}
+
+.sell-section h4{
+    color:#f9672d;
+}
+
+.pending-section h4{
+    color:#337ab7;
+}
+
+.sell-section .signup-btn{
+    background-color: #f9672d !important;
+}
+
+.trade-pricing{
+    float: right;
+    color: #ba7c14;
+    font-size: 23px;
+    margin-top: 25px;
+}
+
+.buy-section-ticker{
+    //background-color: #59a530 !important;
+    color:#fff;
+    border-right: 1px solid #2a415f;
+}
+
+.buy-section-ticker h5{
+    color: #59a530;
+}
+
+.sell-section-ticker{
+    //background-color: #f9672d !important;
+    color:#fff;
+    border-right: 1px solid #2a415f;
+}
+
+.sell-section-ticker h5{
+    color: #f9672d;
+}
+
+.pending-section{
+    color:#fff;
+}
+
+.inr-balance{
+    margin-top: 25px;
+    float: left;
+    font-size: 23px;
+}
+
+.market-trade-ticker{
+    //background-color: #337ab7 !important;
+    color:#fff;
+    border-right: 1px solid #2a415f;
+}
+
+.market-trade-ticker h5{
+    color: #337ab7;
+}
+
+.your-trade-ticker{
+    //background-color: #faebd7 !important;
+    color:#fff;
+}
+
+.your-trade-ticker h5{
+    color: #008b8b;
+}
+
+.trading-details{
+    background-color: #273548;
+    border-top: 1px solid #1a4378;
+    padding-top: 20px;
+}
+
+.trading-details td,th{
+    text-align: center;
+    padding: 3px;
+}
+
+
+.trading-details thead tr{
+    border-bottom: 1px solid #337ab7;
+}
+
+
+.trading-details thead tr th{
+    color: #cb840f;
+}
+
+.tr-odd{
+    background-color: #2a415f;
+}
+
+.col-mod-5{
+    padding-left: 8px !important;
+    padding-right: 5px !important;
+}

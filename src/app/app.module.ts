@@ -10,11 +10,12 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { ProfileComponent } from './Component/profile/profile.component';
+import { UserNavComponent } from './Component/user-nav/user-nav.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, DashboardComponent, ProfileComponent
+    AppComponent, HomeComponent, DashboardComponent, ProfileComponent, UserNavComponent
   ],
   imports: [
     BrowserModule,FormsModule,RouterModule.forRoot([
