@@ -15,10 +15,10 @@ export class HttpCallsService {
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
     this.headers.append('Accept', 'application/json');
-  }
+  }   
 
   getAllItems(url: string): Observable<any> {
-    return this.http.get(url, this.headers).map((response: any) => {
+   return this.http.get(url, this.headers).map((response: any) => {
       console.log(response.json());
       return response.json();
     }).catch(this.handleError);

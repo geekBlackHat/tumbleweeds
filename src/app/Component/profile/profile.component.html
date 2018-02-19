@@ -33,8 +33,8 @@
         </div>        
     </div>
     <div class="row">
-        <button>Deposit BTC</button>
-        <button>Withdraw BTC</button>
+        <input type="button" value="Deposit BTC"  (click)="openDepositModal(deposit)" />
+        <input type="button" value="Withdraw BTC" (click)="openWithdrawalModal(withdraw)" />
     </div>
     <div class="row">
         <div class="col-sm-6">
@@ -69,3 +69,43 @@
         </div>
     </div>
 </div>
+
+<ng-template #deposit>
+        <div class="modal-header">
+          <h3 class="modal-title pull-left">BTC DEPOSIT</h3>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div style="padding:15px;">
+          <div class="credentials-form">
+              <label>0x2997c5660bfaf8dcb1b79386fd2803d46aaa810a</label><br /><br />
+              <label> MINIMUM DEPOSIT LIMIT </label><br />
+                    <label> 0.01 ETH </label><br /><br />
+                Please only transfer Ether tokens to this wallet address. Sending any others token may result into a loss and no wallet credit.
+          </div>
+        </div>
+</ng-template>
+
+<ng-template #withdraw>
+        <div class="modal-header">
+          <h3 class="modal-title pull-left">BTC WITHDRAWAL</h3>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div style="padding:15px;">
+          <div class="credentials-form">
+            <input  type="number" placeholder="volume"  />
+            <br />
+            <input  type="text" placeholder="Destination wallet address" autocomplete="off"  />
+            <br />
+            <input  type="text" placeholder="Remarks" autocomplete="off"  />
+            <br /> <br />
+            
+             Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back
+            <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
+            <input class="signup-btn" type="button" value="Next"  />
+          </div>
+        </div>
+</ng-template>
