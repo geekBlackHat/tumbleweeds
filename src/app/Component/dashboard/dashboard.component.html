@@ -19,14 +19,14 @@
       <h4 align="center">Buy</h4>
       <div>
         <div>
-          <input type="text" placeholder="amount BTC" />
+          <input type="number" placeholder="amount BTC" [(ngModel)]= "buyAmount"  (keyup)="onKey($event,'buy')" />
         </div>
         <div>
-          <input type="text" placeholder="price/BTC" />
+          <input type="number" placeholder="price/BTC" [(ngModel)]= "buyPricePerBTC" (keyup)="onKey($event,'buy')" />
         </div>
         <div>
-          <span class="trade-pricing">Rs. 19000</span>
-          <input class="signup-btn" type="button" value="Buy" />          
+          <span class="trade-pricing">Rs. {{buyTotalValue}}</span>
+          <input class="signup-btn" type="button" value="Buy" (click)="openModal(BuySellTemplate,'buy')" />          
         </div>
       </div>
     </div>
@@ -34,14 +34,14 @@
       <h4 align="center">Sell</h4>
       <div>
         <div>
-          <input type="text" placeholder="amount BTC" />
+          <input type="number" placeholder="amount BTC" [(ngModel)]= "sellAmount" (keyup)="onKey($event,'sell')" />
         </div>
         <div>
-          <input type="text" placeholder="price/BTC" />
+          <input type="number" placeholder="price/BTC"  [(ngModel)]= "sellPricePerBTC" (keyup)="onKey($event,'sell')" />
         </div>
         <div>
-          <span class="trade-pricing">Rs. 19000</span>
-          <input class="signup-btn" type="button" value="Buy" />          
+          <span class="trade-pricing">Rs. {{sellTotalValue}}</span>
+          <input class="signup-btn" type="button" value="Sell" (click)="openModal(BuySellTemplate,'sell')" />          
         </div>
       </div>
     </div>
@@ -139,3 +139,50 @@
     </div>
   </div>
 </div>
+
+<ng-template #BuySellTemplate>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">{{TradeTitle}}</h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div style="padding:15px;">
+    <div class="credentials-form">
+      <div *ngIf="buy">
+      <table border="1">
+        <tr>
+          <th>COIN</th>
+          <th>VOLUME</th>
+          <th>PRICE</th>
+          <th>TOTAL</th>
+        </tr>
+        <tr>
+          <td>{{coin}}</td>
+          <td>{{amount}}</td>
+          <td>{{perBtc}}</td>
+          <td>{{buyTotalValue}}</td>
+        </tr>
+      </table>
+      <input class="signup-btn" type="button" value="CONFIRM" (click)="BuyAndSell()" />
+    </div>
+    <div *ngIf="sell">
+        <table border="1">
+            <tr>
+              <th>COIN</th>
+              <th>VOLUME</th>
+              <th>PRICE</th>
+              <th>TOTAL</th>
+            </tr>
+            <tr>
+              <td>{{coin}}</td>
+              <td>{{sellBindAmount}}</td>
+              <td>{{sellBindperBtc}}</td>
+              <td>{{sellTotalValue}}</td>
+            </tr>
+          </table>
+          <input class="signup-btn" type="button" value="CONFIRM" (click)="BuyAndSell()" />
+    </div>
+  </div>
+  </div>
+</ng-template>
