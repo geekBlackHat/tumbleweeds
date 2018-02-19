@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
@@ -14,10 +14,11 @@ export class ProfileComponent implements OnInit {
     "Password": "12345",
     "MobileNumber": "1234567890",
   };
-  constructor() { }
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {
-
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#273548';
+    this.elementRef.nativeElement.ownerDocument.body.style.color = '#fff';
   }
 
    

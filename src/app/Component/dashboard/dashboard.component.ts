@@ -8,6 +8,22 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  tickerAPIResults : any = {
+    buy_orders : [
+      { vol: 0.324, price: 700000 },
+      { vol: 0.324, price: 700000 },
+      { vol: 0.324, price: 700000 },
+      { vol: 0.324, price: 700000 },
+      { vol: 0.324, price: 700000 },
+      { vol: 0.324, price: 700000 },
+      { vol: 0.324, price: 700000 },
+      { vol: 0.324, price: 700000 },
+      { vol: 0.324, price: 700000 },
+      { vol: 0.324, price: 700000 },
+      { vol: 0.324, price: 700000 }
+    ]
+  };
+
   constructor(private _router: Router) { }
 
   ngOnInit() {

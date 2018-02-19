@@ -1,0 +1,63 @@
+
+body{
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+h3{
+    color: #cb840f;;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.navbar-default {
+    background-color: #273548;
+    border-color: #337ab7;
+    color: #fff;
+}
+
+.nav-sign-in{
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    color: #cb840f;
+}
+
+.modal-content{
+    border-radius: 0px !important;
+    background-color: #273548;
+    color:#fff;
+}
+
+.home-top-div{
+    background-color: #273548;
+    color: #fff;
+    padding: 100px 15px 50px 15px;
+}
+
+.main-left p{
+    margin: 26px 0px;
+    color: #878e93;
+}
+
+.credentials-form input{
+    width: 100%;
+    margin: 10px 0px;
+    padding: 3px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #337ab7;
+    color:#fff;
+}
+
+.credentials-form h3{
+    color:#cb840f;
+}
+
+
+.signup-btn{
+    background-color: #337ab7 !important;
+    height: 40px;
+    margin-top: 25px !important;
+}

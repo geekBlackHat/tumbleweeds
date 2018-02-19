@@ -1,44 +1,69 @@
-<p>
-  home works!
-</p>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 
- <div>
-  <h3>Sign Up</h3>
-  <a class="btn btn-primary" (click)="openModal(template)">Sign In</a>
-  <ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Sign In</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="form-group">
-      <div>
-         <input class="form-control" type="text" placeholder="Email" [(ngModel)]="LoginData.Email" />
-         <br />
-         <input class="form-control" type="password" placeholder="Password" autocomplete="off" [(ngModel)]="LoginData.Password" />
-         <br />
-        <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-         <input class="btn btn-primary" type="button" value="Sign In" (click)="Login(LoginData)" />
+  <div class="navbar-header">   
+
+    <a class="navbar-brand" href="#">CyptoDesk</a>
+    
+  </div>
+  <a class="nav-sign-in" (click)="openModal(template)">Sign In</a>
+</nav>
+<div class="home-top-div">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="main-left">
+          <h1>The Most Trusted Digital Asset Exchange In India</h1>
+
+          <p>CyptoDesk is India's market leader in Cryptocurrency landscape. We provide the simplest and trusted platform to trade, store,
+          use and accept cryptocurrencies like Bitcoin, Ethereum,Litecoin, Bitcoin Cash etc. With over 1,50,000+ customers
+          that vouch for the ease with which BuyUcoin enables cryptocurrency activities, we are on a mission "To bring cryptocurrency
+          in a million pockets."</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="credentials-form">
+          <h3>Create an account to start trading</h3>
+          
+          <div>
+            <input type="text" placeholder="First Name" [(ngModel)]="UserData.FirstName" />
+          </div>
+          <div>
+            <input type="text" placeholder="Last Name" [(ngModel)]="UserData.LastName" />
+          </div>
+          <div>
+            <input type="text" placeholder="Email" [(ngModel)]="UserData.Email" />
+          </div>
+          <div>
+            <input type="password" placeholder="Password" [(ngModel)]="UserData.Password" />
+          </div>
+          <div>
+            <input type="text" placeholder="MobileNumber" [(ngModel)]="UserData.MobileNumber" />
+          </div>
+          <div>
+            <input class="signup-btn" type="button" value="Sign Up" (click)="UserRegistration(UserData)" />
+          </div>
+        </div>
       </div>
     </div>
-  </ng-template>
-  <div>
-    <input type="text" placeholder="First Name" [(ngModel)]="UserData.FirstName" />
   </div>
-  <div>
-    <input type="text" placeholder="Last Name" [(ngModel)]="UserData.LastName" />
+<div>
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">Sign In</h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
   </div>
-  <div>
-    <input type="text" placeholder="Email" [(ngModel)]="UserData.Email" />
+  <div style="padding:15px;">
+    <div class="credentials-form">
+      <input  type="text" placeholder="Email" [(ngModel)]="LoginData.Email" />
+      <br />
+      <input  type="password" placeholder="Password" autocomplete="off" [(ngModel)]="LoginData.Password" />
+      <br />
+      <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
+      <input class="signup-btn" type="button" value="Sign In" (click)="Login(LoginData)" />
+    </div>
   </div>
-  <div>
-    <input type="password" placeholder="Password" [(ngModel)]="UserData.Password" />
-  </div>
-  <div>
-    <input type="text" placeholder="MobileNumber" [(ngModel)]="UserData.MobileNumber" />
-  </div>
-  <div>
-    <input type="button" value="Sign Up" (click)="UserRegistration(UserData)" />
-  </div>
-</div>
+</ng-template>
