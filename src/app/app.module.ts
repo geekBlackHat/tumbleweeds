@@ -7,7 +7,7 @@ import { HomeComponent } from './Component/home/home.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { HttpModule } from '@angular/http';
 
-import { HttpCallsService } from './services/httpservice.service';
+import { HttpCallsService } from './services/apiservice.service';
 import { DataService } from './services/dataservice.service';
 
 import { AppComponent } from './app.component';

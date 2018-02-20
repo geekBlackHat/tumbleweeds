@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class HttpCallsService {
   headers: Headers;
-
+  baseurl: string = "http://127.0.0.1:8080"
   constructor(protected http: Http) {
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
@@ -26,8 +26,9 @@ export class HttpCallsService {
 
   postData(data: any, url: string) {
     //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let finalUrl = this.baseurl + url;
     let options = new RequestOptions({ headers: this.headers });
-    return this.http.post(url, data, options)
+    return this.http.post(finalUrl, data, options)
       .map((response: Response) => {
         return response.json();
       }).catch(this.handleError);
