@@ -20,36 +20,77 @@
           in a million pockets."</p>
         </div>
       </div>
+      <form #form="ngForm" (ngSubmit) = "userRegistration(form.value, ConfirmTemplate)" novalidate>
       <div class="col-md-4">
         <div class="credentials-form">
-          <h3>Create an account to start trading</h3>
           
-          <div>
-            <input type="text" placeholder="First Name" [(ngModel)]="UserData.FirstName" />
-          </div>
-          <div>
-            <input type="text" placeholder="Last Name" [(ngModel)]="UserData.LastName" />
-          </div>
-          <div>
-            <input type="text" placeholder="Email" [(ngModel)]="UserData.Email" />
-          </div>
-          <div>
-            <input type="password" placeholder="Password" [(ngModel)]="UserData.Password" />
-          </div>
-          <div>
-            <input type="text" placeholder="MobileNumber" [(ngModel)]="UserData.MobileNumber" />
-          </div>
-          <div>
-            <input class="signup-btn" type="button" value="Sign Up" (click)="UserRegistration(UserData)" />
-          </div>
+          <h3>Create an account to start trading</h3>
+      
+            <div>
+              <input #fnam="ngModel" required name="fname" autocomplete="off" type="text" placeholder="First Name"  [(ngModel)]="UserData.FirstName" />
+            </div>
+            <div *ngIf="fnam.errors && (fnam.dirty || fnam.touched)" class="alert alert-danger">
+              <div [hidden]="!fnam.errors.required">
+                  Please enter a first name
+              </div>
+            </div>
+            <div>
+              <input type="text" placeholder="Last Name" autocomplete="off" required name="lname" #lname="ngModel" [(ngModel)]="UserData.LastName" />
+            </div>
+            <div *ngIf="lname.errors && (lname.dirty || lname.touched)" class="alert alert-danger">
+                <div [hidden]="!lname.errors.required">
+                    Please enter a last name
+                </div>
+              </div>
+            <div>
+              <input type="email" #email="ngModel" required autocomplete="off" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email" [(ngModel)]="UserData.Email"  />
+            </div>
+            <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
+                <div [hidden]="!email.errors.required">
+                    Please enter a email
+                </div>
+                <div [hidden]="!email.errors.pattern">
+                    Please enter valid email id
+                </div>
+              </div>
+            <div>
+              <input type="password" #passwrd="ngModel" autocomplete="off" placeholder="Password" required name="password" minlength="8" [(ngModel)]="UserData.Password" />
+            </div>
+            <div *ngIf="passwrd.errors && (passwrd.dirty || passwrd.touched)" class="alert alert-danger">
+                <div [hidden]="!passwrd.errors.required">
+                    Please enter a password
+                </div>
+                <div [hidden]="!passwrd.errors.minlength">
+                    Please enter atleast 8 characters
+                </div>
+              </div>
+            <div>
+              <input type="number" placeholder="MobileNumber" autocomplete="off" name="mobile" required [(ngModel)]="UserData.MobileNumber" #mob="ngModel" maxlength="10" />
+            </div>
+            <div *ngIf="mob.errors && (mob.dirty || mob.touched)" class="alert alert-danger">
+                <div [hidden]="!mob.errors.required">
+                    Please enter a mobile number
+                </div>
+                <div [hidden]="!passwrd.errors.maxlength">
+                    Please enter atleast 10 digits
+                </div>
+              </div>
+              <div *ngIf="signErrorFlag"> 
+                  {{signErrorLabel}}
+              </div>
+            <div>
+              <input class="signup-btn" type="submit" value="Sign Up" />
+            </div>
         </div>
       </div>
+    </form>
     </div>
   </div>
 <div>
 
 
 <ng-template #template>
+ 
   <div class="modal-header">
     <h3 class="modal-title pull-left">Sign In</h3>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -58,12 +99,44 @@
   </div>
   <div style="padding:15px;">
     <div class="credentials-form">
-      <input  type="text" placeholder="Email" [(ngModel)]="LoginData.Email" />
+        <form #frmSignIn="ngForm" (ngSubmit)="Login(LoginData)" novalidate>
+      <div>
+        <input type="email" #emailId="ngModel" required autocomplete="off" name="emai" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email" [(ngModel)]="LoginData.Email" />
+      </div>
+      <div *ngIf="emailId.errors && (emailId.dirty || emailId.touched)" class="alert alert-danger">
+          <div [hidden]="!emailId.errors.required">
+              Please enter a email
+          </div>
+          <div [hidden]="!emailId.errors.pattern">
+              Please enter valid email id
+          </div>
+        </div><br />
+      <input type="password" placeholder="Password" name="password" autocomplete="off" [(ngModel)]="LoginData.Password" />
       <br />
-      <input  type="password" placeholder="Password" autocomplete="off" [(ngModel)]="LoginData.Password" />
-      <br />
+      <div *ngIf="loginBool">
+        {{loginLabel}}
+      </div>
       <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-      <input class="signup-btn" type="button" value="Sign In" (click)="Login(LoginData)" />
+      <input class="signup-btn" type="submit" value="{{signInButtonText}}" />
+    </form>
     </div>
   </div>
+
 </ng-template>
+
+<!-- Confirmation pop-up after sign-up -->
+<ng-template #ConfirmTemplate>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Success</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+       User Registration Successfuly Completed.
+    </div>
+    <div>
+        <button type="button" class="btn btn-default" (click)="confirm()" >Ok</button>
+    </div>
+  </ng-template>
+
