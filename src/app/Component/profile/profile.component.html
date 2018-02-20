@@ -27,8 +27,8 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <input type="button" class="deposit-btn" value="Deposit INR" (click)="openDepositModal(deposit)" />
-                        <input type="button" class="withdraw-btn" value="Withdraw INR" (click)="openWithdrawalModal(withdraw)" />
+                        <input type="button" class="deposit-btn" value="Deposit INR" (click)="openDepositModal(depositINR)" />
+                        <input type="button" class="withdraw-btn" value="Withdraw INR" (click)="openWithdrawalModal(withdrawINR)" />
                     </div>                    
                 </div><br/>
                 <div class="row">
@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <input type="button" class="deposit-btn" value="Deposit BTC" (click)="openDepositModal(deposit)" />
-                        <input type="button" class="withdraw-btn" value="Withdraw BTC" (click)="openWithdrawalModal(withdraw)" />
+                        <input type="button" class="withdraw-btn" value="Withdraw BTC" (click)=" withdrawBTCStatus=0; openWithdrawalModal(withdraw) " />
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div style="padding:15px;">
+        <div style="padding:15px;" *ngIf="withdrawBTCStatus ==0">
           <div class="credentials-form">
             <input  type="number" placeholder="volume" [(ngModel)]="txnSendObject.amountSatoshis"  />
             <br />
@@ -114,7 +114,78 @@
             
              Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back
             <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-            <input class="signup-btn" type="button" value="Next" (click)="sendBTC()"  />
+            <input class="signup-btn" type="button" value="Confirm" (click)="sendBTC()"  />
           </div>
         </div>
+        <div id="loader" *ngIf="withdrawBTCStatus ==1" style="height: 100px">
+            Test Loading...
+        </div>
+        <div id="result" *ngIf="withdrawBTCStatus ==2" class="credentials-form">
+            <br/>
+            <br/>
+            <label style="margin-left:50px">Status :</label>
+            <label>{{withdrawBTCResult.currentTransaction.status}}</label>
+            <br/>
+            <label style="margin-left:50px">Fee :</label>
+            <label>{{withdrawBTCResult.currentTransaction.fee}}</label>
+            <br/>
+            <label style="margin-left:50px">Transaction ID :</label>
+            <label>{{withdrawBTCResult.currentTransaction.tx.substring(0,50)}}</label>
+            <br/>
+            <br/>
+            <input class="signup-btn" type="button" value="Ok" (click)="modalRef.hide();"  />
+        </div>
+</ng-template>
+<ng-template #depositINR>
+    <div class="modal-header">
+      <h3 class="modal-title pull-left">Deposit INR</h3>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div style="padding:15px;">
+      <div class="credentials-form">
+        <input  type="number" required placeholder="Amount" [(ngModel)]="txnDepositINR.amount"  required #depositAmount="ngModel"/>
+        <br /> 
+        <div *ngIf="depositAmount.errors?.required"> 
+            <span class="errorMsg">Amount is required.</span>
+        </div>   
+        <br/>
+
+        <input  type="text" placeholder="Remarks" [(ngModel)]="txnDepositINR.remark"  />
+        <br /> 
+       <!-- <label ng-show="depositINRError"> Amount is required. </label><br />  -->   
+        <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
+        <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
+        <input class="signup-btn" type="button" value="Submit" (click)="modalRef.hide(); transactionINR(txnDepositINR)"  />
+      </div>
+    </div>   
+</ng-template>
+
+<ng-template #withdrawINR>
+    <div class="modal-header">
+      <h3 class="modal-title pull-left">Withdraw INR</h3>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div style="padding:15px;">
+      <div class="credentials-form">
+        <input  type="number" placeholder="Amount" [(ngModel)]="txnWithdrawINR.amount" required #withdrawAmount="ngModel"  />
+        <br /> 
+        <div *ngIf="withdrawAmount.errors?.required"> 
+            <span class="errorMsg">Amount is required.</span> 
+        </div>   
+        <br/>
+
+        <input  type="text" placeholder="Remarks" [(ngModel)]="txnWithdrawINR.remark"  />
+        <br /> 
+
+       <!-- <label ng-show="withdrawINRError"> Amount is required. </label><br />     -->
+        
+        <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
+        <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
+        <input class="signup-btn" type="button" value="Submit" (click)="modalRef.hide(); transactionINR(txnWithdrawINR)"  />
+      </div>
+    </div>
 </ng-template>
