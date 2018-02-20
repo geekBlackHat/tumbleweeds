@@ -2,12 +2,12 @@ import { Component, OnInit,TemplateRef  } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Routes, RouterModule,Router } from '@angular/router' ;
-import { HttpCallsService } from '../../Services/apiservice.service';
+import { ApiCallsService } from '../../services/apiservice.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  providers: [HttpCallsService],
+  providers: [ApiCallsService],
   styleUrls: ['./home.component.css']
 })
 
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   bsModalRef: BsModalRef;
   firstName:string;lastName:string;email:string;mobile:number;
  
-  constructor(private modalService: BsModalService, private _route: Router, private httpCallsService: HttpCallsService) { 
+  constructor(private modalService: BsModalService, private _route: Router, private ApiCallsService: ApiCallsService) { 
     this.UserData = {
       FirstName:'',
       LastName:'',Email:'',MobileNumber:'',Password:''
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
   UserRegistration(Data){
      //alert(Data);
      console.log(Data.FirstName);
-     this.httpCallsService.postData(Data, '/AddRegistrationInfo').subscribe(res => {
+     this.ApiCallsService.postData(Data, '/AddRegistrationInfo').subscribe(res => {
        console.log(res);
      });
   }
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
   Login(loginData){
     console.log(loginData);
     this.modalRef.hide();
-    this.httpCallsService.postData(loginData, '/GetRegistrationInfoById').subscribe(res => {
+    this.ApiCallsService.postData(loginData, '/GetRegistrationInfoById').subscribe(res => {
       console.log(res);
       if (res.Registrations != undefined){
         localStorage.setItem('userID', res.Registrations[0].id);

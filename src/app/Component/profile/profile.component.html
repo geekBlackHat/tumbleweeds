@@ -2,7 +2,7 @@
 <div class="container" style="margin-top:65px;">
     <div class="row">
         <div class="col-sm-6">
-            <div class="row">
+            <div class="row sec-container">
                 <h5>Personal Information</h5>
                 <div class="row">
                     <div class="col-xs-6">Name</div>
@@ -19,26 +19,35 @@
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="row">
+            <div class="row sec-container">
                 <h5>Balances</h5> 
                 <div class="row">
                     <div class="col-xs-6">INR Balance</div>
                     <div class="col-xs-6">Rs. 20000</div>
                 </div>
                 <div class="row">
+                    <div class="col-sm-12">
+                        <input type="button" class="deposit-btn" value="Deposit INR" (click)="openDepositModal(deposit)" />
+                        <input type="button" class="withdraw-btn" value="Withdraw INR" (click)="openWithdrawalModal(withdraw)" />
+                    </div>                    
+                </div><br/>
+                <div class="row">
                     <div class="col-xs-6">BTC Balance</div>
                     <div class="col-xs-6">0.20000</div>
                 </div>
-            </div> 
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input type="button" class="deposit-btn" value="Deposit BTC" (click)="openDepositModal(deposit)" />
+                        <input type="button" class="withdraw-btn" value="Withdraw BTC" (click)="openWithdrawalModal(withdraw)" />
+                    </div>
+                </div>
+            </div>
         </div>        
     </div>
-    <div class="row">
-        <input type="button" value="Deposit BTC"  (click)="openDepositModal(deposit)" />
-        <input type="button" value="Withdraw BTC" (click)="openWithdrawalModal(withdraw)" />
-    </div>
+    
     <div class="row">
         <div class="col-sm-6">
-            <div class="row">
+            <div class="row sec-container">
                 <h5>Trading History</h5>
                 <div class="row">
                     <div class="col-xs-6">Name</div>
@@ -55,7 +64,7 @@
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="row">
+            <div class="row sec-container">
                 <h5>BTC Transaction History</h5>
                 <div class="row">
                     <div class="col-xs-6">INR Balance</div>

@@ -1,3 +1,23 @@
-body{
-    background-color: #1a4378;
+h5{
+    background-color: #2a415f;
+    padding: 10px;
+    color: #ba7c14;
+}
+
+.sec-container{
+    padding: 10px;
+}
+
+.deposit-btn{
+    background-color: #59a530;
+    border: none;
+    padding: 5px 15px;
+    color: #fff;
+}
+
+.withdraw-btn{
+    background-color: #f9672d;
+    border: none;
+    padding: 5px 15px;
+    color: #fff;
 }

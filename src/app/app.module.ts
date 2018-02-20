@@ -7,7 +7,7 @@ import { HomeComponent } from './Component/home/home.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { HttpModule } from '@angular/http';
 
-import { HttpCallsService } from './services/apiservice.service';
+import { ApiCallsService } from './services/apiservice.service';
 import { DataService } from './services/dataservice.service';
 
 import { AppComponent } from './app.component';
@@ -27,7 +27,7 @@ import { UserNavComponent } from './Component/user-nav/user-nav.component';
       { path:'**',component:HomeComponent }
     ]),ModalModule.forRoot()
   ],
-  providers: [HttpCallsService, DataService],
+  providers: [ApiCallsService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
