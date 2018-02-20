@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router,RouterModule ,Routes} from '@angular/router';
-import { HttpCallsService } from './../../services/httpservice.service'
+import { HttpCallsService } from './../../services/apiservice.service'
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
