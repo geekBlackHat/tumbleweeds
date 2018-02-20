@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/throw';
@@ -8,17 +7,16 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map'
 
 @Injectable()
-export class HttpCallsService {
-  headers: Headers;
-  baseurl: string = "http://127.0.0.1:8080"
+export class ApiCallsService {
+  baseurl: string = "http://127.0.0.1:8080";
   constructor(protected http: Http) {
-    this.headers = new Headers();
-    this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Accept', 'application/json');
+    //this.headers = new Headers();
+    //this.headers.append('Content-Type', 'application/json');
+    //this.headers.append('Accept', 'application/json');
   }   
 
   getAllItems(url: string): Observable<any> {
-   return this.http.get(url, this.headers).map((response: any) => {
+   return this.http.get(url).map((response: any) => {
       console.log(response.json());
       return response.json();
     }).catch(this.handleError);
@@ -27,8 +25,8 @@ export class HttpCallsService {
   postData(data: any, url: string) {
     //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let finalUrl = this.baseurl + url;
-    let options = new RequestOptions({ headers: this.headers });
-    return this.http.post(finalUrl, data, options)
+    //let options = new RequestOptions({ headers: this.headers });
+    return this.http.post(finalUrl, data)
       .map((response: Response) => {
         return response.json();
       }).catch(this.handleError);

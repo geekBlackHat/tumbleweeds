@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router,RouterModule ,Routes} from '@angular/router';
-import { HttpCallsService } from './../../services/apiservice.service'
+import { ApiCallsService } from './../../services/apiservice.service'
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     ]
   };
 
-  constructor(private _router: Router, private httpCalls: HttpCallsService,private modalService: BsModalService) { }
+  constructor(private _router: Router, private httpCalls: ApiCallsService,private modalService: BsModalService) { }
 
   ngOnInit() {
     this.httpCalls.getAllItems('http://xrp-backend-tumbleweed-backend.7e14.starter-us-west-2.openshiftapps.com/pingAPI').subscribe(
