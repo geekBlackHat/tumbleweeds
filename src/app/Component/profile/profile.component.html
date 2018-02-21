@@ -6,15 +6,15 @@
                 <h5>Personal Information</h5>
                 <div class="row">
                     <div class="col-xs-6">Name</div>
-                    <div class="col-xs-6">{{profile.FirstName + profile.LastName}}</div>
+                    <div class="col-xs-6">{{userProfile.FirstName + userProfile.LastName}}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6">Email</div>
-                    <div class="col-xs-6">{{profile.Email}}</div>
+                    <div class="col-xs-6">{{userProfile.Email}}</div>
                 </div>
                 <div class="row"> 
                     <div class="col-xs-6">Mobile No</div>
-                    <div class="col-xs-6">{{profile.MobileNumber}}</div>
+                    <div class="col-xs-6">{{userProfile.MobileNumber}}</div>
                 </div>
             </div>
         </div>
@@ -66,13 +66,53 @@
         <div class="col-sm-6">
             <div class="row sec-container">
                 <h5>BTC Transaction History</h5>
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-xs-6">INR Balance</div>
                     <div class="col-xs-6">Rs. 20000</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6">BTC Balance</div>
                     <div class="col-xs-6">0.20000</div>
+                </div>-->
+                <div class="row" *ngIf="withdrawBTCResultTransactions != null && withdrawBTCResultTransactions != undefined">
+                    <table class="airlines-lga-table av-responsive-table table-sub-pages airlines-table" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>                                
+                                <th width="20%" class="">Transaction ID</th>
+                                <th width="15%" class="">Status</th>
+                                <th width="20%">Amount</th>
+                                <th width="20%">Destination Address</th>
+                                <th width="10%">Fee</th>
+                                <th width="15%">DateTime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd"  *ngFor="let transaction of withdrawBTCResultTransactions">
+                                <td data-label="Transaction ID">
+                                    <div class="cell-divs">
+                                        {{transaction.txId.substring(0,50)}}
+                                    </div>
+                                </td>
+                                <td data-label="Status">
+                                    <div class="cell-divs">
+                                        {{transaction.status}}
+                                    </div>
+                                </td>
+                                <td data-label="Amount">
+                                    <div class="cell-divs">{{transaction.amtSatoshis}}</div>
+                                </td>
+                                <td data-label="Destination Address">
+                                    <div class="cell-divs">{{transaction.destAddress}}</div>
+                                </td>
+                                <td data-label="Fee">
+                                    <div class="cell-divs">{{transaction.fee}}</div>
+                                </td>
+                                <td data-label="DateTime">
+                                        <div class="cell-divs">{{transaction.timestamp | date : 'short'}}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

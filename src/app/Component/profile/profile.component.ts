@@ -3,6 +3,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Routes, RouterModule,Router } from '@angular/router' ;
 import { ApiCallsService } from '../../services/apiservice.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,8 @@ export class ProfileComponent implements OnInit {
   withdrawBTCResult : any;
   showMainWithdraw : boolean =true;
   withdrawBTCStatus : number =0;
+  userProfile : any;
+  withdrawBTCResultTransactions : any;
 
   profile = {
     "FirstName": "Anurag",
@@ -58,6 +61,11 @@ export class ProfileComponent implements OnInit {
     this.txnSendObject.userId = localStorage.getItem('userID');
     this.txnDepositINR.userId = localStorage.getItem('userID');
     this.txnWithdrawINR.userId = localStorage.getItem('userID');
+    this.ApiCallsService.postData({ "userid" :  this.txnSendObject.userId} ,'/GetProfile').subscribe(res => {
+      console.log('ProfileData: ' + res); 
+      this.userProfile = res.userinfo[0];
+      this.withdrawBTCResultTransactions =res.BTCTransactionHistory
+    });
   }
 
   openWithdrawalModal(template: TemplateRef<any>) {
@@ -79,6 +87,7 @@ export class ProfileComponent implements OnInit {
       this.showResult =true;
       this.showLoader =false;
       this.withdrawBTCResult =res;
+      this.withdrawBTCResultTransactions= res.transactions;
     });
   }
    
