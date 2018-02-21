@@ -198,6 +198,7 @@
         <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
         <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
         <input class="signup-btn" type="button" value="Submit" (click)="modalRef.hide(); transactionINR(txnDepositINR)"  />
+        <input class="signup-btn" type="button" value="Cancel" (click)="modalRef.hide();"  />
       </div>
     </div>   
 </ng-template>
@@ -225,7 +226,8 @@
         
         <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
         <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-        <input class="signup-btn" type="button" value="Submit" (click)="modalRef.hide(); transactionINR(txnWithdrawINR)"  />
+        <input class="signup-btn halfWidthBlueBtn" type="button" value="Submit" (click)="modalRef.hide(); transactionINR(txnWithdrawINR)"  />
+        <input class="signup-btn halfWidthTransperentBtn" type="button" value="Cancel" (click)="modalRef.hide();"  />
       </div>
     </div>
 </ng-template>

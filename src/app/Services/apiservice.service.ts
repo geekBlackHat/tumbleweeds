@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http,Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { map, catchError } from 'rxjs/operators';
@@ -40,9 +40,10 @@ export class ApiCallsService {
   }
 
   postData(data: any, url: string) {
-    //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+  //  let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let finalUrl = this.baseurl + url;
-    //let options = new RequestOptions({ headers: this.headers });
+    //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    //let options = new RequestOptions({ headers: headers });
     return this.http.post(finalUrl, data)
       .map((response: Response) => {
         return response.json();
