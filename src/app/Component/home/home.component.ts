@@ -14,7 +14,7 @@ import { ApiCallsService } from '../../services/apiservice.service';
 export class HomeComponent implements OnInit {
   @ViewChild('form') form: any;
   //@ViewChild('frmSignIn') tform : any;
-  @ViewChild('ConfirmTemplate') confirmModal : any;
+  @ViewChild('ConfirmTemplate') confirmModal : TemplateRef<any>;
   modalRef: BsModalRef;
   UserData : object = {};
   LoginData : object = {};
@@ -24,6 +24,9 @@ export class HomeComponent implements OnInit {
   signErrorLabel : string;
   signErrorFlag : boolean = false;
   signInButtonText : string = "Sign In";
+  signUpPopUpTitle : string;
+  signUpPopUpMsg : string;
+  signUpButtonText: string = "Sign Up";
 
  // pattern: "[^ @]*@[^ @]*";
   firstName:string;lastName:string;email:string;mobile:number;
@@ -61,18 +64,29 @@ export class HomeComponent implements OnInit {
       this.signErrorFlag = true;
      return;
   }
-  
   this.signErrorFlag = false;
-  console.log(data);
+  //console.log(data);
   console.log(this.UserData);
-  this.ApiCallsService.postData(this.UserData, '/AddRegistrationInfo').subscribe(res => {
-    console.log(res);
-    if(res == "Successfuly Created"){
-         this.modalRef = this.modalService.show(template);
-         this.form.reset();
-    }
-    //this.confirmModal.show();
-  });
+  this.signUpButtonText = "Signing Up..."
+  try{
+      this.ApiCallsService.postData(this.UserData, '/AddRegistrationInfo').subscribe((res) => {
+        console.log(res);
+        if(res.status == "Successfully Created"){
+            this.signUpPopUpTitle = "User registration rompleted. Now, Log In!!";
+            this.modalRef = this.modalService.show(template);
+            this.form.reset();
+            this.signUpButtonText = "Sign Up";
+        }
+      }, (logs) => {
+           this.signUpPopUpMsg = "Somthing went wrong please try after sometime";
+           this.signUpPopUpTitle = "Error";
+           this.signUpButtonText = "Sign Up";
+           this.form.reset();
+           this.modalRef = this.modalService.show(template);
+           console.log(logs);
+      });
+  }
+  catch(ex){}
 }
 
   Login(loginData){
@@ -89,7 +103,7 @@ export class HomeComponent implements OnInit {
      this.ApiCallsService.postData(loginData, '/GetRegistrationInfoById').subscribe((res) => {
        console.log(res);
         this.signInButtonText = "Sign In"
-        if (res.Registrations != undefined){
+        if (res.Registrations.length > 0){
           localStorage.setItem('userID', res.Registrations[0].id);
           this.modalRef.hide();
           this._route.navigateByUrl("/dashboard");
@@ -98,7 +112,11 @@ export class HomeComponent implements OnInit {
           //invalid login credentials
         }
     }, (err) => {
-      console.log(err);
+        this.signUpPopUpMsg = "Somthing went wrong please try after sometime";
+        this.signUpPopUpTitle = "Error";
+        this.modalRef.hide();
+        this.modalRef = this.modalService.show(this.confirmModal);
+        console.log(err);
     });
     
   }

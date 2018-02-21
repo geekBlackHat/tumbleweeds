@@ -25,6 +25,9 @@ export class DashboardComponent implements OnInit {
   perBtc : any;
   sellBindAmount : any;
   sellBindperBtc : any;
+  buyErrorLabel : string;
+  sellErrorLabel : string;
+
   tickerAPIResults : any = {
     buy_orders : [
       { vol: 0.324, price: 700000 },
@@ -60,7 +63,7 @@ export class DashboardComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>, trade:any) {
-    if(trade == "buy" && this.buyAmount !=undefined && this.buyPricePerBTC != undefined){       
+    if(trade == "buy" && this.buyAmount != undefined && this.buyPricePerBTC != undefined){       
        this.TradeTitle = "NEW BUY ORDER";
        this.modalRef = this.modalService.show(template);
        this.amount;this.perBtc;this.buyTotalValue;
@@ -80,12 +83,18 @@ export class DashboardComponent implements OnInit {
           this.perBtc = this.buyPricePerBTC;
           this.buyTotalValue = this.amount * this.perBtc;
       }
+      else{
+        this.buyTotalValue = 0;
+      }
      }
      else{
       if(this.sellAmount != undefined && this.sellPricePerBTC){
           this.sellBindAmount = this.sellAmount;
           this.sellBindperBtc = this.sellPricePerBTC;
           this.sellTotalValue = this.sellBindAmount * this.sellBindperBtc;
+      }
+      else{
+        this.sellTotalValue = 0;
       }
      }
   }

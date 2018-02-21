@@ -66,3 +66,13 @@ textarea:focus, input:focus{
 {
     color: #f9672d;
 }
+
+.halfWidthBlueBtn {
+    width: 50% !important;
+}
+
+.halfWidthTransperentBtn {
+    width: 50% !important;
+    background-color: transparent !important;
+    border: 1px solid #fff;
+}
