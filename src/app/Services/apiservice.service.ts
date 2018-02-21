@@ -1,13 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import { map, catchError } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
+
+import * as socketIo from 'socket.io-client';
+
+interface Socket {
+  on(event: string, callback: (data: any) => void);
+  emit(event: string, data: any);
+}
+
+declare var io: {
+  connect(url: string): Socket;
+};
+
 
 @Injectable()
 export class ApiCallsService {
+  socket: Socket;
+  observer: Observer<any>;
+
   baseurl: string = "http://127.0.0.1:8080";
   constructor(protected http: Http) {
     //this.headers = new Headers();
@@ -29,7 +46,12 @@ export class ApiCallsService {
     return this.http.post(finalUrl, data)
       .map((response: Response) => {
         return response.json();
-      }).catch(this.handleError);
+      }).catch((err : Response) => {
+        let details = err.json();
+        return Observable.throw(details);
+      });
+
+      //this.handleError
   }
 
   //This Method is used for error handling from API

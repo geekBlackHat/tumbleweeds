@@ -40,8 +40,11 @@ export class DashboardComponent implements OnInit {
       { vol: 0.324, price: 700000 }
     ]
   };
+  userId : any;
 
-  constructor(private _router: Router, private httpCalls: ApiCallsService,private modalService: BsModalService) { }
+  constructor(private _router: Router, private httpCalls: ApiCallsService, private modalService: BsModalService, private ApiCallsService: ApiCallsService) {
+
+  }
 
   ngOnInit() {
     this.httpCalls.getAllItems('http://xrp-backend-tumbleweed-backend.7e14.starter-us-west-2.openshiftapps.com/pingAPI').subscribe(
@@ -49,6 +52,7 @@ export class DashboardComponent implements OnInit {
         console.log(res);
       }
     );
+    this.userId = localStorage.getItem('userID');
   }
 
   profile(){
@@ -56,8 +60,7 @@ export class DashboardComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>, trade:any) {
-    if(trade == "buy" && this.buyAmount !=undefined && this.buyPricePerBTC != undefined){
-       
+    if(trade == "buy" && this.buyAmount !=undefined && this.buyPricePerBTC != undefined){       
        this.TradeTitle = "NEW BUY ORDER";
        this.modalRef = this.modalService.show(template);
        this.amount;this.perBtc;this.buyTotalValue;
@@ -87,8 +90,28 @@ export class DashboardComponent implements OnInit {
      }
   }
 
-  BuyAndSell(){
-    alert()
+  buyBTC(){
+    var buyBTCObj = {
+      userID: this.userId,
+      amount: this.buyAmount,
+      price: this.buyPricePerBTC
+    }
+
+    this.ApiCallsService.postData(buyBTCObj, '/buyBTC').subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  sellBTC(){
+    var sellBTCObj = {
+      userID: this.userId,
+      amount: this.sellBindAmount,
+      price: this.sellBindperBtc
+    }
+
+    this.ApiCallsService.postData(sellBTCObj, '/sellBTC').subscribe(res => {
+      console.log(res);
+    });
   }
 
 }
