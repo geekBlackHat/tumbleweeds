@@ -6,15 +6,15 @@
                 <h5>Personal Information</h5>
                 <div class="row">
                     <div class="col-xs-6">Name</div>
-                    <div class="col-xs-6">{{profile.FirstName + profile.LastName}}</div>
+                    <div class="col-xs-6">{{userProfile.FirstName + userProfile.LastName}}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6">Email</div>
-                    <div class="col-xs-6">{{profile.Email}}</div>
+                    <div class="col-xs-6">{{userProfile.Email}}</div>
                 </div>
                 <div class="row"> 
                     <div class="col-xs-6">Mobile No</div>
-                    <div class="col-xs-6">{{profile.MobileNumber}}</div>
+                    <div class="col-xs-6">{{userProfile.MobileNumber}}</div>
                 </div>
             </div>
         </div>
@@ -27,8 +27,8 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <input type="button" class="deposit-btn" value="Deposit INR" (click)="openDepositModal(deposit)" />
-                        <input type="button" class="withdraw-btn" value="Withdraw INR" (click)="openWithdrawalModal(withdraw)" />
+                        <input type="button" class="deposit-btn" value="Deposit INR" (click)="openDepositModal(depositINR)" />
+                        <input type="button" class="withdraw-btn" value="Withdraw INR" (click)="openWithdrawalModal(withdrawINR)" />
                     </div>                    
                 </div><br/>
                 <div class="row">
@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <input type="button" class="deposit-btn" value="Deposit BTC" (click)="openDepositModal(deposit)" />
-                        <input type="button" class="withdraw-btn" value="Withdraw BTC" (click)="openWithdrawalModal(withdraw)" />
+                        <input type="button" class="withdraw-btn" value="Withdraw BTC" (click)=" withdrawBTCStatus=0; openWithdrawalModal(withdraw) " />
                     </div>
                 </div>
             </div>
@@ -66,13 +66,53 @@
         <div class="col-sm-6">
             <div class="row sec-container">
                 <h5>BTC Transaction History</h5>
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-xs-6">INR Balance</div>
                     <div class="col-xs-6">Rs. 20000</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6">BTC Balance</div>
                     <div class="col-xs-6">0.20000</div>
+                </div>-->
+                <div class="row" *ngIf="withdrawBTCResultTransactions != null && withdrawBTCResultTransactions != undefined">
+                    <table class="airlines-lga-table av-responsive-table table-sub-pages airlines-table" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>                                
+                                <th width="20%" class="">Transaction ID</th>
+                                <th width="15%" class="">Status</th>
+                                <th width="20%">Amount</th>
+                                <th width="20%">Destination Address</th>
+                                <th width="10%">Fee</th>
+                                <th width="15%">DateTime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd"  *ngFor="let transaction of withdrawBTCResultTransactions">
+                                <td data-label="Transaction ID">
+                                    <div class="cell-divs">
+                                        {{transaction.txId.substring(0,50)}}
+                                    </div>
+                                </td>
+                                <td data-label="Status">
+                                    <div class="cell-divs">
+                                        {{transaction.status}}
+                                    </div>
+                                </td>
+                                <td data-label="Amount">
+                                    <div class="cell-divs">{{transaction.amtSatoshis}}</div>
+                                </td>
+                                <td data-label="Destination Address">
+                                    <div class="cell-divs">{{transaction.destAddress}}</div>
+                                </td>
+                                <td data-label="Fee">
+                                    <div class="cell-divs">{{transaction.fee}}</div>
+                                </td>
+                                <td data-label="DateTime">
+                                        <div class="cell-divs">{{transaction.timestamp | date : 'short'}}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -103,7 +143,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div style="padding:15px;">
+        <div style="padding:15px;" *ngIf="withdrawBTCStatus ==0">
           <div class="credentials-form">
             <input  type="number" placeholder="volume" [(ngModel)]="txnSendObject.amountSatoshis"  />
             <br />
@@ -114,7 +154,78 @@
             
              Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back
             <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-            <input class="signup-btn" type="button" value="Next" (click)="sendBTC()"  />
+            <input class="signup-btn" type="button" value="Confirm" (click)="sendBTC()"  />
           </div>
         </div>
+        <div id="loader" *ngIf="withdrawBTCStatus ==1" style="height: 100px">
+            Test Loading...
+        </div>
+        <div id="result" *ngIf="withdrawBTCStatus ==2" class="credentials-form">
+            <br/>
+            <br/>
+            <label style="margin-left:50px">Status :</label>
+            <label>{{withdrawBTCResult.currentTransaction.status}}</label>
+            <br/>
+            <label style="margin-left:50px">Fee :</label>
+            <label>{{withdrawBTCResult.currentTransaction.fee}}</label>
+            <br/>
+            <label style="margin-left:50px">Transaction ID :</label>
+            <label>{{withdrawBTCResult.currentTransaction.tx.substring(0,50)}}</label>
+            <br/>
+            <br/>
+            <input class="signup-btn" type="button" value="Ok" (click)="modalRef.hide();"  />
+        </div>
+</ng-template>
+<ng-template #depositINR>
+    <div class="modal-header">
+      <h3 class="modal-title pull-left">Deposit INR</h3>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div style="padding:15px;">
+      <div class="credentials-form">
+        <input  type="number" required placeholder="Amount" [(ngModel)]="txnDepositINR.amount"  required #depositAmount="ngModel"/>
+        <br /> 
+        <div *ngIf="depositAmount.errors?.required"> 
+            <span class="errorMsg">Amount is required.</span>
+        </div>   
+        <br/>
+
+        <input  type="text" placeholder="Remarks" [(ngModel)]="txnDepositINR.remark"  />
+        <br /> 
+       <!-- <label ng-show="depositINRError"> Amount is required. </label><br />  -->   
+        <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
+        <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
+        <input class="signup-btn" type="button" value="Submit" (click)="modalRef.hide(); transactionINR(txnDepositINR)"  />
+      </div>
+    </div>   
+</ng-template>
+
+<ng-template #withdrawINR>
+    <div class="modal-header">
+      <h3 class="modal-title pull-left">Withdraw INR</h3>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div style="padding:15px;">
+      <div class="credentials-form">
+        <input  type="number" placeholder="Amount" [(ngModel)]="txnWithdrawINR.amount" required #withdrawAmount="ngModel"  />
+        <br /> 
+        <div *ngIf="withdrawAmount.errors?.required"> 
+            <span class="errorMsg">Amount is required.</span> 
+        </div>   
+        <br/>
+
+        <input  type="text" placeholder="Remarks" [(ngModel)]="txnWithdrawINR.remark"  />
+        <br /> 
+
+       <!-- <label ng-show="withdrawINRError"> Amount is required. </label><br />     -->
+        
+        <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
+        <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
+        <input class="signup-btn" type="button" value="Submit" (click)="modalRef.hide(); transactionINR(txnWithdrawINR)"  />
+      </div>
+    </div>
 </ng-template>

@@ -61,3 +61,8 @@ textarea:focus, input:focus{
     height: 40px;
     margin-top: 25px !important;
 }
+
+.errorMsg
+{
+    color: #cb840f;
+}

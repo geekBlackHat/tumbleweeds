@@ -3,6 +3,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Routes, RouterModule,Router } from '@angular/router' ;
 import { ApiCallsService } from '../../services/apiservice.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +13,16 @@ import { ApiCallsService } from '../../services/apiservice.service';
 })
 export class ProfileComponent implements OnInit {
   modalRef: BsModalRef;
+
+  depositINRError :boolean =false;
+  withdrawINRError : boolean =false;
+  showLoader :boolean =false;
+  showResult : boolean =false;
+  withdrawBTCResult : any;
+  showMainWithdraw : boolean =true;
+  withdrawBTCStatus : number =0;
+  userProfile : any;
+  withdrawBTCResultTransactions : any;
 
   profile = {
     "FirstName": "Anurag",
@@ -28,16 +39,37 @@ export class ProfileComponent implements OnInit {
     remarks:"",
   }
 
+  txnDepositINR = {
+    userId:"",   
+    amount:"" ,
+    remarks:"",
+    type:"deposit" 
+  }
+
+  txnWithdrawINR = {
+    userId:"",   
+    amount:"" ,
+    remarks:"",
+    type :"withdraw" 
+  }
+
   constructor(private elementRef: ElementRef, private modalService: BsModalService, private _route: Router, private ApiCallsService: ApiCallsService) { }
 
   ngOnInit() { 
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#273548';
     this.elementRef.nativeElement.ownerDocument.body.style.color = '#fff';
     this.txnSendObject.userId = localStorage.getItem('userID');
+    this.txnDepositINR.userId = localStorage.getItem('userID');
+    this.txnWithdrawINR.userId = localStorage.getItem('userID');
+    this.ApiCallsService.postData({ "userid" :  this.txnSendObject.userId} ,'/GetProfile').subscribe(res => {
+      console.log('ProfileData: ' + res); 
+      this.userProfile = res.userinfo[0];
+      this.withdrawBTCResultTransactions =res.BTCTransactionHistory
+    });
   }
 
   openWithdrawalModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template);  
   }
 
   openDepositModal(template: TemplateRef<any>) {
@@ -45,11 +77,32 @@ export class ProfileComponent implements OnInit {
   }
 
   sendBTC(){
+    this.withdrawBTCStatus =1;
+    this.showLoader =true;
+    this.showResult =false;
+    this.showMainWithdraw = false;
     this.ApiCallsService.postData(this.txnSendObject,'/sendBTC').subscribe(res => {
-      console.log(res);
+      console.log(res); 
+      this.withdrawBTCStatus =2;     
+      this.showResult =true;
+      this.showLoader =false;
+      this.withdrawBTCResult =res;
+      this.withdrawBTCResultTransactions= res.transactions;
     });
   }
    
+  transactionINR(data)
+  {   
+   /* if(this.txnSendObject.amountSatoshis !=null && this.txnSendObject.amountSatoshis !="")
+    {
+     this.withdrawINRError = false;
+    }
+    else
+    {
+      this.withdrawINRError = true;
+    }*/
+    
+  }
   
-
+  
 }
