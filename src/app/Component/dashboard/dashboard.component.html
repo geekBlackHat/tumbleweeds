@@ -150,39 +150,47 @@
   <div style="padding:15px;">
     <div class="credentials-form">
       <div *ngIf="buy">
-      <table border="1">
-        <tr>
-          <th>COIN</th>
-          <th>VOLUME</th>
-          <th>PRICE</th>
-          <th>TOTAL</th>
-        </tr>
-        <tr>
-          <td>{{coin}}</td>
-          <td>{{amount}}</td>
-          <td>{{perBtc}}</td>
-          <td>{{buyTotalValue}}</td>
-        </tr>
-      </table>
-      <input class="signup-btn" type="button" value="CONFIRM" (click)="BuyAndSell()" />
+        <div>
+          <div class="row order-popup-row">
+            <div class="col-xs-4">COIN</div>
+            <div class="col-xs-8">{{coin}}</div>
+          </div>
+          <div class="row order-popup-row">
+            <div class="col-xs-4">VOLUME</div>
+            <div class="col-xs-8">{{amount}}</div>
+          </div>
+          <div class="row order-popup-row">
+            <div class="col-xs-4">BID(Price/BTC)</div>
+            <div class="col-xs-8">{{perBtc}}</div>
+          </div>
+          <div class="row order-popup-row">
+            <div class="col-xs-4">TOTAL</div>
+            <div class="col-xs-8">{{buyTotalValue}}</div>
+          </div>
+        </div>
+        <input class="signup-btn" type="button" value="CONFIRM" (click)="buyBTC()" />
+      </div>
+      <div *ngIf="sell">
+        <div>
+          <div class="row order-popup-row">
+            <div class="col-xs-4">COIN</div>
+            <div class="col-xs-8">{{coin}}</div>
+          </div>
+          <div class="row order-popup-row">
+            <div class="col-xs-4">VOLUME</div>
+            <div class="col-xs-8">{{sellBindAmount}}</div>
+          </div>
+          <div class="row order-popup-row">
+            <div class="col-xs-4">BID(Price/BTC)</div>
+            <div class="col-xs-8">{{sellBindperBtc}}</div>
+          </div>
+          <div class="row order-popup-row">
+            <div class="col-xs-4">TOTAL</div>
+            <div class="col-xs-8">{{sellTotalValue}}</div>
+          </div>
+        </div>
+        <input class="signup-btn" type="button" value="CONFIRM" (click)="sellBTC()" />
+      </div>
     </div>
-    <div *ngIf="sell">
-        <table border="1">
-            <tr>
-              <th>COIN</th>
-              <th>VOLUME</th>
-              <th>PRICE</th>
-              <th>TOTAL</th>
-            </tr>
-            <tr>
-              <td>{{coin}}</td>
-              <td>{{sellBindAmount}}</td>
-              <td>{{sellBindperBtc}}</td>
-              <td>{{sellTotalValue}}</td>
-            </tr>
-          </table>
-          <input class="signup-btn" type="button" value="CONFIRM" (click)="BuyAndSell()" />
-    </div>
-  </div>
   </div>
 </ng-template>

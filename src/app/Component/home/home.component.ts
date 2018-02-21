@@ -65,3 +65,13 @@ export class HomeComponent implements OnInit {
   }
 
 }
+
+//req : userID
+/*
+{
+  "userInfo" : {
+    "FirstName" : ""
+  },
+  "BTCTransactionHistory" : [{},{}]
+}
+*/
