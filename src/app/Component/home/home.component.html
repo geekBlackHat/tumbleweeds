@@ -29,7 +29,7 @@
             <div>
               <input #fnam="ngModel" required name="fname" autocomplete="off" type="text" placeholder="First Name"  [(ngModel)]="UserData.FirstName" />
             </div>
-            <div *ngIf="fnam.errors && (fnam.dirty || fnam.touched)" class="alert alert-danger">
+            <div *ngIf="fnam.errors && (fnam.dirty || fnam.touched)" >
               <div [hidden]="!fnam.errors.required">
                   Please enter a first name
               </div>

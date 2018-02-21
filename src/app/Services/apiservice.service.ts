@@ -46,7 +46,12 @@ export class ApiCallsService {
     return this.http.post(finalUrl, data)
       .map((response: Response) => {
         return response.json();
-      }).catch(this.handleError);
+      }).catch((err : Response) => {
+        let details = err.json();
+        return Observable.throw(details);
+      });
+
+      //this.handleError
   }
 
   //This Method is used for error handling from API

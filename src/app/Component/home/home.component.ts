@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
    this.signInButtonText = "Signing In...";
    this.loginBool = false;
    
-     this.ApiCallsService.postData(loginData, '/GetRegistrationInfoById').subscribe(res => {
+     this.ApiCallsService.postData(loginData, '/GetRegistrationInfoById').subscribe((res) => {
        console.log(res);
         this.signInButtonText = "Sign In"
         if (res.Registrations != undefined){
@@ -97,6 +97,8 @@ export class HomeComponent implements OnInit {
         else {
           //invalid login credentials
         }
+    }, (err) => {
+      console.log(err);
     });
     
   }
