@@ -49,6 +49,15 @@ textarea:focus, input:focus{
     border: none;
     border-bottom: 1px solid #337ab7;
     color:#fff;
+    caret-color: #cb840f;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #273548 inset;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #fff !important;
 }
 
 .credentials-form h3{

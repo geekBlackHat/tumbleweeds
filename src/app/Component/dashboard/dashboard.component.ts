@@ -1,8 +1,9 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ElementRef } from '@angular/core';
 import { Router,RouterModule ,Routes} from '@angular/router';
 import { ApiCallsService } from './../../services/apiservice.service'
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,32 +30,33 @@ export class DashboardComponent implements OnInit {
   sellErrorLabel : string;
 
   tickerAPIResults : any = {
-    buy_orders : [
-      { vol: 0.324, price: 700000 },
-      { vol: 0.324, price: 700000 },
-      { vol: 0.324, price: 700000 },
-      { vol: 0.324, price: 700000 },
-      { vol: 0.324, price: 700000 },
-      { vol: 0.324, price: 700000 },
-      { vol: 0.324, price: 700000 },
-      { vol: 0.324, price: 700000 },
-      { vol: 0.324, price: 700000 },
-      { vol: 0.324, price: 700000 },
-      { vol: 0.324, price: 700000 }
+    buyOrders : [
+    ],
+    sellOrders : [      
+    ],
+    tradingHistory : [      
     ]
   };
   userId : any;
+  stockQuote: any;
+  sub: Subscription;
 
-  constructor(private _router: Router, private httpCalls: ApiCallsService, private modalService: BsModalService, private ApiCallsService: ApiCallsService) {
-
+  constructor(private _router: Router, private httpCalls: ApiCallsService, private elementRef: ElementRef, private modalService: BsModalService, private ApiCallsService: ApiCallsService) {
+    
   }
 
   ngOnInit() {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#273548';
     this.httpCalls.getAllItems('http://xrp-backend-tumbleweed-backend.7e14.starter-us-west-2.openshiftapps.com/pingAPI').subscribe(
       res => {
         console.log(res);
       }
     );
+    this.sub = this.httpCalls.getQuotes()
+      .subscribe(quote => {
+        this.tickerAPIResults = quote;
+        console.log("socket res", quote);
+      });
     this.userId = localStorage.getItem('userID');
   }
 

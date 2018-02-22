@@ -25,6 +25,29 @@ export class ApiCallsService {
   socket: Socket;
   observer: Observer<any>;
 
+  getQuotes(): Observable<number> {
+    var connectionOptions = {
+      "force new connection": true,
+      "reconnectionAttempts": "Infinity", //avoid having user reconnect manually in order to prevent dead clients after a server restart
+      "timeout": 10000, //before connect_error and connect_timeout are emitted.
+      "transports": ["websocket"]
+    };
+
+    this.socket = socketIo('http://localhost:8080/', connectionOptions);
+
+    this.socket.on('ticker', (res) => {
+      this.observer.next(res);
+    });
+
+    return this.createObservable();
+  }
+
+  createObservable(): Observable<number> {
+    return new Observable(observer => {
+      this.observer = observer;
+    });
+  }
+
   baseurl: string = "http://127.0.0.1:8080";
   constructor(protected http: Http) {
     //this.headers = new Headers();

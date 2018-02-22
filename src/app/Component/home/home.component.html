@@ -127,7 +127,7 @@
 <!-- Confirmation pop-up after sign-up -->
 <ng-template #ConfirmTemplate>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">{{signUpPopUpTitle}}</h4>
+      <h3 class="modal-title pull-left">{{signUpPopUpTitle}}</h3>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -135,8 +135,10 @@
     <div class="modal-body">
        {{signUpPopUpMsg}}
     </div>
-    <div>
-        <input type="button" class="signup-btn" (click)="confirm()" value="Ok" />
+    <div style="padding:15px;">
+      <div class="credentials-form">
+          <input type="button" class="signup-btn" (click)="confirm()" value="Ok" />
+      </div>
     </div>
   </ng-template>
 
