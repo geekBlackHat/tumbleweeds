@@ -25,6 +25,9 @@
           <input type="number" placeholder="price/BTC" [(ngModel)]= "buyPricePerBTC" (keyup)="onKey($event,'buy')" />
         </div>
         <div>
+          <span>{{buyErrorLabel}}</span>
+        </div>
+        <div>
           <span class="trade-pricing">Rs. {{buyTotalValue}}</span>
           <input class="signup-btn" type="button" value="Buy" (click)="openModal(BuySellTemplate,'buy')" />          
         </div>
