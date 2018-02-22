@@ -1,9 +1,10 @@
-import { Component, OnInit, ElementRef, TemplateRef } from '@angular/core';
+import { Component, OnInit, ElementRef, TemplateRef,Input,Output,EventEmitter, Directive } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Routes, RouterModule,Router } from '@angular/router' ;
 import { ApiCallsService } from '../../services/apiservice.service';
 import { DatePipe } from '@angular/common';
+import Clipboard from 'clipboard';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,11 @@ import { DatePipe } from '@angular/common';
   providers: [ApiCallsService],
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements OnInit {
+  isCopied1: boolean = false;
+  isCopied2: boolean = false;
+ 
   modalRef: BsModalRef;
 
   depositINRError :boolean =false;
@@ -23,6 +28,15 @@ export class ProfileComponent implements OnInit {
   withdrawBTCStatus : number =0;
   userProfile : any;
   withdrawBTCResultTransactions : any;
+
+  amtSatoshis: any;
+  destAddress:any;
+  fee: number;
+  remarks : string;
+  status:string;
+  timestamp : any;
+  txId : any;
+
 
   profile = {
     "FirstName": "Anurag",
@@ -103,6 +117,18 @@ export class ProfileComponent implements OnInit {
     }*/
     
   }
-  
+
+  history(template : TemplateRef<any>, transactionHistory : any){
+    
+     this.amtSatoshis = transactionHistory.amtSatoshis;
+     this.destAddress = transactionHistory.destAddress;
+     this.fee = transactionHistory.fee;
+     this.remarks = transactionHistory.remarks;
+     this.status = transactionHistory.status;
+     this.timestamp = transactionHistory.timestamp;
+     this.txId = transactionHistory.txId;
+     this.modalRef = this.modalService.show(template);
+     console.log(transactionHistory);
+  }
   
 }
