@@ -23,6 +23,13 @@ export class ProfileComponent implements OnInit {
   withdrawBTCStatus : number =0;
   userProfile : any;
   withdrawBTCResultTransactions : any;
+  depositINRStatus : number =0;
+  withdrawINRStatus : number =0;
+  INRResult : boolean;
+  btcAddress : any;
+  tradingHistory : any;
+  INRhistory :any;
+
 
   profile = {
     "FirstName": "Anurag",
@@ -64,6 +71,9 @@ export class ProfileComponent implements OnInit {
     this.ApiCallsService.postData({ "userid" :  this.txnSendObject.userId} ,'/GetProfile').subscribe(res => {
       console.log('ProfileData: ' + res); 
       this.userProfile = res.userinfo[0];
+      this.btcAddress = res.btcaddress;
+      this.tradingHistory = res.tradinghistroy;
+      this.INRhistory = res.inrtransaction;
       this.withdrawBTCResultTransactions =res.BTCTransactionHistory
     });
   }
@@ -92,17 +102,18 @@ export class ProfileComponent implements OnInit {
   }
    
   transactionINR(data)
-  {   
-   /* if(this.txnSendObject.amountSatoshis !=null && this.txnSendObject.amountSatoshis !="")
-    {
-     this.withdrawINRError = false;
-    }
-    else
-    {
-      this.withdrawINRError = true;
-    }*/
-    
-  }
-  
+  {  
+   this.depositINRStatus =1; 
+   if(data != null && data != undefined)
+   {
+    var userId = localStorage.getItem('userID');    
+    var passDataToAPI={'userid': userId,"amount":data.amount,"remarks":data.remarks,"TxtnType":data.type,"CreditFrom":"BANK"};
+    this.ApiCallsService.postData(passDataToAPI,'/AddINRTransactionInfo').subscribe(res => {
+      this.depositINRStatus =2;
+      console.log('INRData : ' + res); 
+      this.INRResult = res.RecentTransaction;       
+    });
+   }    
+  } 
   
 }

@@ -2,7 +2,7 @@
 <div class="container" style="margin-top:65px;">
     <div class="row">
         <div class="col-sm-6">
-            <div class="row sec-container">
+            <div class="row sec-container" *ngIf="userProfile != null && userProfile != undefined">
                 <h5>Personal Information</h5>
                 <div class="row">
                     <div class="col-xs-6">Name</div>
@@ -27,8 +27,8 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <input type="button" class="deposit-btn" value="Deposit INR" (click)="openDepositModal(depositINR)" />
-                        <input type="button" class="withdraw-btn" value="Withdraw INR" (click)="openWithdrawalModal(withdrawINR)" />
+                        <input type="button" class="deposit-btn" value="Deposit INR" (click)="depositINRStatus =0; openDepositModal(depositINR)" />
+                        <input type="button" class="withdraw-btn" value="Withdraw INR" (click)="depositINRStatus=0; openWithdrawalModal(withdrawINR)" />
                     </div>                    
                 </div><br/>
                 <div class="row">
@@ -128,10 +128,10 @@
         </div>
         <div style="padding:15px;">
           <div class="credentials-form">
-              <label>0x2997c5660bfaf8dcb1b79386fd2803d46aaa810a</label><br /><br />
+              <label>{{btcAddress.address}}</label><br /><br />
               <label> MINIMUM DEPOSIT LIMIT </label><br />
-                    <label> 0.01 ETH </label><br /><br />
-                Please only transfer Ether tokens to this wallet address. Sending any others token may result into a loss and no wallet credit.
+                    <label> 0.001 BTC </label><br /><br />
+                Please only transfer Bitcoins to this wallet address. Sending any others coins/tokens may result into a loss and no wallet credit.
           </div>
         </div>
 </ng-template>
@@ -183,7 +183,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div style="padding:15px;">
+    <div style="padding:15px;" *ngIf="depositINRStatus ==0">
       <div class="credentials-form">
         <input  type="number" required placeholder="Amount" [(ngModel)]="txnDepositINR.amount"  required #depositAmount="ngModel"/>
         <br /> 
@@ -192,15 +192,29 @@
         </div>   
         <br/>
 
-        <input  type="text" placeholder="Remarks" [(ngModel)]="txnDepositINR.remark"  />
+        <input  type="text" placeholder="Remarks" [(ngModel)]="txnDepositINR.remarks"  />
         <br /> 
        <!-- <label ng-show="depositINRError"> Amount is required. </label><br />  -->   
         <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
         <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-        <input class="signup-btn" type="button" value="Submit" (click)="modalRef.hide(); transactionINR(txnDepositINR)"  />
+        <input class="signup-btn" type="button" value="Submit" (click)="transactionINR(txnDepositINR)"  />
         <input class="signup-btn" type="button" value="Cancel" (click)="modalRef.hide();"  />
       </div>
     </div>   
+    <div id="loader" *ngIf="depositINRStatus == 1" style="height: 100px">
+            Test Loading...
+    </div>
+    <div id="result" *ngIf="depositINRStatus == 2" style="height: 100px; margin:30px">
+        <div *ngIf="INRResult">
+            <img src="../../assets/images/checked.png" height="30" width="30">
+            <span>SUCCESS</span>
+            </div>  
+            <br/>
+            <div *ngIf="!INRResult">
+            <img src="../../assets/images/error.png" height="30" width="30">
+            <span>FAIL</span>
+            </div>  
+    </div>
 </ng-template>
 
 <ng-template #withdrawINR>
@@ -210,7 +224,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div style="padding:15px;">
+    <div style="padding:15px;" *ngIf="depositINRStatus ==0">
       <div class="credentials-form">
         <input  type="number" placeholder="Amount" [(ngModel)]="txnWithdrawINR.amount" required #withdrawAmount="ngModel"  />
         <br /> 
@@ -219,7 +233,7 @@
         </div>   
         <br/>
 
-        <input  type="text" placeholder="Remarks" [(ngModel)]="txnWithdrawINR.remark"  />
+        <input  type="text" placeholder="Remarks" [(ngModel)]="txnWithdrawINR.remarks"  />
         <br /> 
 
        <!-- <label ng-show="withdrawINRError"> Amount is required. </label><br />     -->
@@ -229,5 +243,19 @@
         <input class="signup-btn halfWidthBlueBtn" type="button" value="Submit" (click)="modalRef.hide(); transactionINR(txnWithdrawINR)"  />
         <input class="signup-btn halfWidthTransperentBtn" type="button" value="Cancel" (click)="modalRef.hide();"  />
       </div>
+    </div>
+    <div id="loader" *ngIf="depositINRStatus ==1" style="height: 100px">
+            Test Loading...
+    </div>
+    <div id="result" *ngIf="depositINRStatus ==2" style="height: 100px; margin:30px">
+            <div *ngIf="INRResult">
+                    <img src="../../assets/images/checked.png" height="30" width="30">
+                    <span>SUCCESS</span>
+                    </div>  
+                    <br/>
+                    <div *ngIf="!INRResult">
+                    <img src="../../assets/images/error.png" height="30" width="30">
+                    <span>FAIL</span>
+                    </div> 
     </div>
 </ng-template>
