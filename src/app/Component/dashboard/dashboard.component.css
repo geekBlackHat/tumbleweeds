@@ -4,7 +4,8 @@ h5{
 }
 
 .ticker-list{
-    margin-top: 40px;
+    padding-top: 40px;
+    background-color: #fff;
     border-bottom: 1px solid #377db8;
 }
 
@@ -152,4 +153,9 @@ h5{
 
 .order-popup-row{
     padding: 10px;
+}
+
+.no-trade-data{
+    text-align: center;
+    padding: 40px 25px;
 }

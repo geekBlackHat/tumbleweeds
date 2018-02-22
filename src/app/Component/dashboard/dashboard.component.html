@@ -79,12 +79,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let trade of tickerAPIResults.buy_orders; let i = index;" [ngClass]="{'tr-odd':(i%2 != 0)}">
-            <td style="width:50%">{{trade.vol}}</td>
+          <tr *ngFor="let trade of tickerAPIResults.buyOrders; let i = index;" [ngClass]="{'tr-odd':(i%2 != 0)}">
+            <td style="width:50%">{{trade.amount}}</td>
             <td style="width:50%">{{trade.price}}</td>
           </tr>
         </tbody>
       </table>
+      <div *ngIf="tickerAPIResults.buyOrders.length == 0" class="no-trade-data">No data to show</div>
     </div>
     <div class="col-xs-6 col-sm-3 sell-section-ticker">
       <h5>Sell Orders</h5>
@@ -96,12 +97,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let trade of tickerAPIResults.buy_orders; let i = index" [ngClass]="{'tr-odd':(i%2 != 0)}">
-            <td style="width:50%">{{trade.vol}}</td>
+          <tr *ngFor="let trade of tickerAPIResults.sellOrders; let i = index" [ngClass]="{'tr-odd':(i%2 != 0)}">
+            <td style="width:50%">{{trade.amount}}</td>
             <td style="width:50%">{{trade.price}}</td>
           </tr>
         </tbody>
       </table>
+      <div *ngIf="tickerAPIResults.sellOrders.length == 0" class="no-trade-data">No data to show</div>
     </div>
     <div class="col-xs-6 col-sm-3 market-trade-ticker">
       <h5>Market Trade History </h5>
@@ -113,12 +115,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let trade of tickerAPIResults.buy_orders; let i = index" [ngClass]="{'tr-odd':(i%2 != 0)}">
-            <td style="width:50%">{{trade.vol}}</td>
+          <tr *ngFor="let trade of tickerAPIResults.tradingHistory; let i = index" [ngClass]="{'tr-odd':(i%2 != 0)}">
+            <td style="width:50%">{{trade.amount}}</td>
             <td style="width:50%">{{trade.price}}</td>
           </tr>
         </tbody>
       </table>
+      <div *ngIf="tickerAPIResults.tradingHistory.length == 0" class="no-trade-data">No data to show</div>
     </div>
     <div class="col-xs-6 col-sm-3 your-trade-ticker">
       <h5>Your Trade History</h5>
