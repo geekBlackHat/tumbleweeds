@@ -14,14 +14,14 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { ProfileComponent } from './Component/profile/profile.component';
 import { UserNavComponent } from './Component/user-nav/user-nav.component';
-
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
     AppComponent, HomeComponent, DashboardComponent, ProfileComponent, UserNavComponent
   ],
   imports: [
-    BrowserModule, FormsModule, HttpModule,RouterModule.forRoot([
+    BrowserModule, FormsModule, HttpModule,ClipboardModule,RouterModule.forRoot([
       { path:'dashboard',component:DashboardComponent },
       { path:'profile',component:ProfileComponent },
       { path:'**',component:HomeComponent }
