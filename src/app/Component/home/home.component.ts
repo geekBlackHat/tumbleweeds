@@ -27,9 +27,10 @@ export class HomeComponent implements OnInit {
   signUpPopUpTitle : string;
   signUpPopUpMsg : string;
   signUpButtonText: string = "Sign Up";
-
+  userNotExist : string;
   isValidation : boolean = false;
   isValidateSignIn : boolean = false;
+  isUserNotExist : boolean = false;
 
  // pattern: "[^ @]*@[^ @]*";
   firstName:string;lastName:string;email:string;mobile:number;
@@ -54,7 +55,10 @@ export class HomeComponent implements OnInit {
       this.loginBool = false;
       this.isValidateSignIn = false;
       this.isValidation = false;
+      this.isUserNotExist = false;
+      this.form.reset();
       this.signInButtonText = "Sign In";
+      this.signUpButtonText = "Sign Up";
       this.LoginData = {
         Email:'',Password:''
       }
@@ -86,9 +90,10 @@ export class HomeComponent implements OnInit {
       this.ApiCallsService.postData(this.UserData, '/AddRegistrationInfo').subscribe((res) => {
         console.log(res);
         if(res.status == "Successfully Created"){
-            this.signUpPopUpTitle = "User registration rompleted. Now, Log In!!";
-            this.modalRef = this.modalService.show(template);
+            this.signUpPopUpMsg = "User registration completed. Now, Log In!!";
+            this.signUpPopUpTitle = "Success";
             this.form.reset();
+            this.modalRef = this.modalService.show(template);
             this.signUpButtonText = "Sign Up";
         }
       }, (logs) => {
@@ -125,7 +130,8 @@ export class HomeComponent implements OnInit {
           this._route.navigateByUrl("/dashboard");
         }
         else {
-          //invalid login credentials
+            this.isUserNotExist = true;
+            this.userNotExist = "Incorrect user id and password";
         }
     }, (err) => {
         this.signUpPopUpMsg = "Somthing went wrong please try after sometime";
