@@ -12,7 +12,7 @@
                     <div class="col-xs-6">Email</div>
                     <div class="col-xs-6">{{userProfile.Email}}</div>
                 </div>
-                <div class="row"> 
+                <div class="row">
                     <div class="col-xs-6">Mobile No</div>
                     <div class="col-xs-6">{{userProfile.MobileNumber}}</div>
                 </div>
@@ -20,17 +20,20 @@
         </div>
         <div class="col-sm-6">
             <div class="row sec-container">
-                <h5>Balances</h5> 
+                <h5>Balances</h5>
                 <div class="row">
                     <div class="col-xs-6">INR Balance</div>
                     <div class="col-xs-6">Rs. 20000</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <input type="button" class="deposit-btn" value="Deposit INR" (click)="depositINRStatus =0; openDepositModal(depositINR)" />
-                        <input type="button" class="withdraw-btn" value="Withdraw INR" (click)="withdrawINRStatus=0; openWithdrawalModal(withdrawINR)" />
-                    </div>                    
-                </div><br/>
+                        <input type="button" class="deposit-btn" value="Deposit INR" (click)="depositINRStatus =0; openDepositModal(depositINR)"
+                        />
+                        <input type="button" class="withdraw-btn" value="Withdraw INR" (click)="withdrawINRStatus=0; openWithdrawalModal(withdrawINR)"
+                        />
+                    </div>
+                </div>
+                <br/>
                 <div class="row">
                     <div class="col-xs-6">BTC Balance</div>
                     <div class="col-xs-6">0.20000</div>
@@ -38,47 +41,48 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <input type="button" class="deposit-btn" value="Deposit BTC" (click)="openDepositModal(deposit)" />
-                        <input type="button" class="withdraw-btn" value="Withdraw BTC" (click)=" withdrawBTCStatus=0; openWithdrawalModal(withdraw) " />
+                        <input type="button" class="withdraw-btn" value="Withdraw BTC" (click)=" withdrawBTCStatus=0; openWithdrawalModal(withdraw) "
+                        />
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-6">
             <div class="row sec-container">
                 <h5>INR History</h5>
                 <div class="row" class="scroller-base custom-scroller" *ngIf="INRhistory != null && INRhistory != undefined">
-                        <div class="row" >
-                            <div class="col-xs-6">
-                               Amount
-                            </div>
-                            <div class="col-xs-6">
-                               Type
-                            </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Amount
                         </div>
-                        <div class="row" *ngFor="let transaction of INRhistory" (click)="INRHistorytemplate(INRHistory, transaction); ">
-                            <div class="col-xs-6">
-                                {{transaction.Amount}}
-                            </div>
-                            <div class="col-xs-6">
-                                {{transaction.TxtnType}}
-                            </div>
+                        <div class="col-xs-6">
+                            Type
                         </div>
                     </div>
+                    <div class="row" *ngFor="let transaction of INRhistory" (click)="INRHistorytemplate(INRHistory, transaction); ">
+                        <div class="col-xs-6">
+                            {{transaction.Amount}}
+                        </div>
+                        <div class="col-xs-6">
+                            {{transaction.TxtnType}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="row sec-container">
-                <h5>BTC Transaction History</h5>               
-                <div class="row"   class="scroller-base custom-scroller" *ngIf="withdrawBTCResultTransactions != null && withdrawBTCResultTransactions != undefined" >
-                    <div class="row" >
+                <h5>BTC Transaction History</h5>
+                <div class="row" class="scroller-base custom-scroller" *ngIf="withdrawBTCResultTransactions != null && withdrawBTCResultTransactions != undefined">
+                    <div class="row">
                         <div class="col-xs-6">
-                           Amount
+                            Amount
                         </div>
                         <div class="col-xs-6">
-                           Status
+                            Status
                         </div>
                     </div>
                     <div class="row" *ngFor="let transaction of withdrawBTCResultTransactions" (click)="history(transactionHistory, transaction); ">
@@ -94,114 +98,119 @@
         </div>
     </div>
     <div class="row">
-            <div class="col-sm-12">
-                    <div class="row sec-container">
-                        <h5>Trading History</h5>
-                        <div class="row" *ngIf="tradingHistory != null && tradingHistory != undefined" >
-                                <div class="row" >
-                                    <div class="col-xs-6">
-                                       Amount
-                                    </div>
-                                    <div class="col-xs-6">
-                                       Type
-                                    </div>
-                                </div>
-                                <div class="row" *ngFor="let transactiontrade of tradingHistoryData" (click)="TradeHistorytemplate(tradingHistory, transactiontrade);"  >
-                                    <div class="col-xs-6">                                       
-                                        {{transactiontrade.Amount}}
-                                    </div>
-                                    <div class="col-xs-6">
-                                        {{transactiontrade.TxtnType}}
-                                    </div>
-                                </div>
-                            </div>
+        <div class="col-sm-12">
+            <div class="row sec-container">
+                <h5>Trading History</h5>
+                <div class="row" class="scroller-base custom-scroller" *ngIf="tradingHistory != null && tradingHistory != undefined">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Amount
+                        </div>
+                        <div class="col-xs-6">
+                            Type
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let transactiontrade of tradingHistoryData" (click)="TradeHistorytemplate(tradingHistory, transactiontrade);">
+                        <div class="col-xs-6">
+                            {{transactiontrade.Amount}}
+                        </div>
+                        <div class="col-xs-6">
+                            {{transactiontrade.TxtnType}}
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <ng-template #deposit>
-        <div class="modal-header">
-          <h3 class="modal-title pull-left">BTC DEPOSIT</h3>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
+    <div class="modal-header">
+        <h3 class="modal-title pull-left">BTC DEPOSIT</h3>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div style="padding:15px;">
+        <div class="credentials-form">
+            <label>{{btcAddress.address}}</label>
+            <br />
+            <br />
+            <label> MINIMUM DEPOSIT LIMIT </label>
+            <br />
+            <label> 0.001 BTC </label>
+            <br />
+            <br /> Please only transfer Bitcoins to this wallet address. Sending any others coins/tokens may result into a loss
+            and no wallet credit.
         </div>
-        <div style="padding:15px;">
-          <div class="credentials-form">
-              <label>{{btcAddress.address}}</label><br /><br />
-              <label> MINIMUM DEPOSIT LIMIT </label><br />
-                    <label> 0.001 BTC </label><br /><br />
-                Please only transfer Bitcoins to this wallet address. Sending any others coins/tokens may result into a loss and no wallet credit.
-          </div>
-        </div>
+    </div>
 </ng-template>
 
 <ng-template #withdraw>
-        <div class="modal-header">
-          <h3 class="modal-title pull-left">BTC WITHDRAWAL</h3>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div style="padding:15px;" *ngIf="withdrawBTCStatus ==0">
-          <div class="credentials-form">
-            <input  type="number" placeholder="volume" [(ngModel)]="txnSendObject.amountSatoshis"  />
+    <div class="modal-header">
+        <h3 class="modal-title pull-left">BTC WITHDRAWAL</h3>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div style="padding:15px;" *ngIf="withdrawBTCStatus ==0">
+        <div class="credentials-form">
+            <input type="number" placeholder="volume" [(ngModel)]="txnSendObject.amountSatoshis" />
             <br />
-            <input  type="text" placeholder="Destination wallet address" [(ngModel)]="txnSendObject.destinationAddress" autocomplete="off"  />
+            <input type="text" placeholder="Destination wallet address" [(ngModel)]="txnSendObject.destinationAddress" autocomplete="off"
+            />
             <br />
-            <input  type="text" placeholder="Remarks" autocomplete="off" [(ngModel)]="txnSendObject.remarks"  />
-            <br /> <br />
-            
-             Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back
+            <input type="text" placeholder="Remarks" autocomplete="off" [(ngModel)]="txnSendObject.remarks" />
+            <br />
+            <br /> Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back
             <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-            <input class="signup-btn" type="button" value="Confirm" (click)="sendBTC()"  />
-          </div>
+            <input class="signup-btn" type="button" value="Confirm" (click)="sendBTC()" />
         </div>
-        <div id="loader" *ngIf="withdrawBTCStatus ==1" class="loaderStyle" >
-            <img src="../../assets/images/loader.gif" height="50" width="50">
-        </div>
-        <div id="result" *ngIf="withdrawBTCStatus ==2" class="credentials-form">
-            <br/>
-            <br/>
-            <label style="margin-left:50px">Status :</label>
-            <label>{{withdrawBTCResult.currentTransaction.status}}</label>
-            <br/>
-            <label style="margin-left:50px">Fee :</label>
-            <label>{{withdrawBTCResult.currentTransaction.fee}}</label>
-            <br/>
-            <label style="margin-left:50px">Transaction ID :</label>
-            <label>{{withdrawBTCResult.currentTransaction.tx.substring(0,50)}}</label>
-            <br/>
-            <br/>
-            <input class="signup-btn" type="button" value="Ok" (click)="modalRef.hide();"  />
-        </div>
+    </div>
+    <div id="loader" *ngIf="withdrawBTCStatus ==1" class="loaderStyle">
+        <img src="../../assets/images/loader.gif" height="50" width="50">
+    </div>
+    <div id="result" *ngIf="withdrawBTCStatus ==2" class="credentials-form">
+        <br/>
+        <br/>
+        <label style="margin-left:50px">Status :</label>
+        <label>{{withdrawBTCResult.currentTransaction.status}}</label>
+        <br/>
+        <label style="margin-left:50px">Fee :</label>
+        <label>{{withdrawBTCResult.currentTransaction.fee}}</label>
+        <br/>
+        <label style="margin-left:50px">Transaction ID :</label>
+        <label>{{withdrawBTCResult.currentTransaction.tx.substring(0,50)}}</label>
+        <br/>
+        <br/>
+        <input class="signup-btn" type="button" value="Ok" (click)="modalRef.hide();" />
+    </div>
 </ng-template>
 <ng-template #depositINR>
     <div class="modal-header">
-      <h3 class="modal-title pull-left">Deposit INR</h3>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <span aria-hidden="true">&times;</span>
+        <h3 class="modal-title pull-left">Deposit INR</h3>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div style="padding:15px;" *ngIf="depositINRStatus ==0">
-      <div class="credentials-form">
-        <input  type="number" required placeholder="Amount" [(ngModel)]="txnDepositINR.amount"  required #depositAmount="ngModel"/>
-        <br /> 
-        <div *ngIf="depositAmount.errors?.required"> 
-            <span class="errorMsg">Amount is required.</span>
-        </div>   
-        <br/>
+        <div class="credentials-form">
+            <input type="number" required placeholder="Amount" [(ngModel)]="txnDepositINR.amount" required #depositAmount="ngModel" />
+            <br />
+            <div *ngIf="depositAmount.errors?.required">
+                <span class="errorMsg">Amount is required.</span>
+            </div>
+            <br/>
 
-        <input  type="text" placeholder="Remarks" [(ngModel)]="txnDepositINR.remarks"  />
-        <br /> 
-       <!-- <label ng-show="depositINRError"> Amount is required. </label><br />  -->   
-        <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
-        <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-        <input class="signup-btn" type="button" value="Submit" (click)="transactionINR(txnDepositINR,'deposit')"  />
-        <input class="signup-btn" type="button" value="Cancel" (click)="modalRef.hide();"  />
-      </div>
-    </div>   
+            <input type="text" placeholder="Remarks" [(ngModel)]="txnDepositINR.remarks" />
+            <br />
+            <!-- <label ng-show="depositINRError"> Amount is required. </label><br />  -->
+            <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
+            <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
+            <input class="signup-btn" type="button" value="Submit" (click)="transactionINR(txnDepositINR,'deposit')" />
+            <input class="signup-btn" type="button" value="Cancel" (click)="modalRef.hide();" />
+        </div>
+    </div>
     <div id="loader" *ngIf="depositINRStatus == 1" class="loaderStyle">
         <img src="../../assets/images/loader.gif" height="50" width="50">
     </div>
@@ -209,249 +218,253 @@
         <div *ngIf="INRResult">
             <img src="../../assets/images/checked.png" height="30" width="30">
             <span>SUCCESS</span>
-            </div>  
-            <br/>
-            <div *ngIf="!INRResult">
+        </div>
+        <br/>
+        <div *ngIf="!INRResult">
             <img src="../../assets/images/error.png" height="30" width="30">
             <span>FAIL</span>
-            </div>  
+        </div>
     </div>
 </ng-template>
 
 <ng-template #withdrawINR>
     <div class="modal-header">
-      <h3 class="modal-title pull-left">Withdraw INR</h3>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <span aria-hidden="true">&times;</span>
+        <h3 class="modal-title pull-left">Withdraw INR</h3>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div style="padding:15px;" *ngIf="withdrawINRStatus ==0">
-      <div class="credentials-form">
-        <input  type="number" placeholder="Amount" [(ngModel)]="txnWithdrawINR.amount" required #withdrawAmount="ngModel"  />
-        <br /> 
-        <div *ngIf="withdrawAmount.errors?.required"> 
-            <span class="errorMsg">Amount is required.</span> 
-        </div>   
-        <br/>
+        <div class="credentials-form">
+            <input type="number" placeholder="Amount" [(ngModel)]="txnWithdrawINR.amount" required #withdrawAmount="ngModel" />
+            <br />
+            <div *ngIf="withdrawAmount.errors?.required">
+                <span class="errorMsg">Amount is required.</span>
+            </div>
+            <br/>
 
-        <input  type="text" placeholder="Remarks" [(ngModel)]="txnWithdrawINR.remarks"  />
-        <br /> 
+            <input type="text" placeholder="Remarks" [(ngModel)]="txnWithdrawINR.remarks" />
+            <br />
 
-       <!-- <label ng-show="withdrawINRError"> Amount is required. </label><br />     -->
-        
-        <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
-        <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-        <input class="signup-btn halfWidthBlueBtn" type="button" value="Submit" (click)="transactionINR(txnWithdrawINR,'withdraw')"  />
-        <input class="signup-btn halfWidthTransperentBtn" type="button" value="Cancel" (click)="modalRef.hide();"  />
-      </div>
+            <!-- <label ng-show="withdrawINRError"> Amount is required. </label><br />     -->
+
+            <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
+            <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
+            <input class="signup-btn halfWidthBlueBtn" type="button" value="Submit" (click)="transactionINR(txnWithdrawINR,'withdraw')"
+            />
+            <input class="signup-btn halfWidthTransperentBtn" type="button" value="Cancel" (click)="modalRef.hide();" />
+        </div>
     </div>
     <div id="loader" *ngIf="withdrawINRStatus ==1" class="loaderStyle">
-            <img src="../../assets/images/loader.gif" height="50" width="50">
+        <img src="../../assets/images/loader.gif" height="50" width="50">
     </div>
     <div id="result" *ngIf="withdrawINRStatus ==2" style="height: 100px; margin:30px">
-            <div *ngIf="INRResult">
-                    <img src="../../assets/images/checked.png" height="30" width="30">
-                    <span>SUCCESS</span>
-                    </div>  
-                    <br/>
-                    <div *ngIf="!INRResult">
-                    <img src="../../assets/images/error.png" height="30" width="30">
-                    <span>FAIL</span>
-                    </div> 
-    </div>  
+        <div *ngIf="INRResult">
+            <img src="../../assets/images/checked.png" height="30" width="30">
+            <span>SUCCESS</span>
+        </div>
+        <br/>
+        <div *ngIf="!INRResult">
+            <img src="../../assets/images/error.png" height="30" width="30">
+            <span>FAIL</span>
+        </div>
+    </div>
 </ng-template>
 
 <ng-template #transactionHistory style="width:500px;">
     <div class="modal-header">
-      <h3 class="modal-title pull-left">Transaction History</h3>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <span aria-hidden="true">&times;</span>
+        <h3 class="modal-title pull-left">Transaction History</h3>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="row" >
+    <div class="row margin-15" >
         <div class="col-xs-6">
-           Amount
+            Amount
         </div>
         <div class="col-xs-6">
             {{amtSatoshis}}
         </div>
     </div>
-    <div class="row">
+    <div class="row margin-15">
         <div class="col-xs-6">
-           Destination Address
+            Destination Address
         </div>
         <div class="col-xs-6">
             {{destAddress}}
         </div>
     </div>
-    <div class="row">
+    <div class="row margin-15">
         <div class="col-xs-6">
             Fee
-         </div>
-         <div class="col-xs-6">
+        </div>
+        <div class="col-xs-6">
             {{fee}}
         </div>
     </div>
-    <div class="row">
-         <div class="col-xs-6">
+    <div class="row margin-15">
+        <div class="col-xs-6">
             Remarks
-         </div>
-         <div class="col-xs-6">
+        </div>
+        <div class="col-xs-6">
             {{remarks}}
         </div>
     </div>
-    <div class="row">
-         <div class="col-xs-6">
+    <div class="row margin-15">
+        <div class="col-xs-6">
             Status
-         </div>
-         <div class="col-xs-6">
+        </div>
+        <div class="col-xs-6">
             {{status}}
         </div>
     </div>
-    <div class="row">
-         <div class="col-xs-6">
+    <div class="row margin-15">
+        <div class="col-xs-6">
             Timestamp
-         </div>
-         <div class="col-xs-6">
+        </div>
+        <div class="col-xs-6">
             {{timestamp}}
         </div>
     </div>
-    <div class="row">
-         <div class="col-xs-6">
+    <div class="row margin-15">
+        <div class="col-xs-6">
             Transaction Id
-         </div>
+        </div>
     </div>
-    <div class="row">
-         <div class="col-xs-12" style="overflow-wrap: break-word;">
-        <input type="text" class="form-control" [(ngModel)]="txId" placeholder="content will be copy after click the copy button" #inputTarget>
+    <div class="row margin-15">
+        <div class="col-xs-12" style="overflow-wrap: break-word;">
+            <div class="col-xs-10">
+            <input type="text" class="form-control" [(ngModel)]="txId" placeholder="content will be copy after click the copy button"
+                #inputTarget>
+            </div>
+            <div class="col-xs-2" style="margin-left: -25px">
             <span class="input-group-btn">
-             
-              <button class="btn btn-default" [class.btn-success]= "isCopied2" type="button" 
-              [ngxClipboard]="inputTarget" (cbOnSuccess)="isCopied2 = true">copy</button>
+
+                <button class="btn btn-default" [class.btn-success]="isCopied2" type="button" [ngxClipboard]="inputTarget" (cbOnSuccess)="isCopied2 = true">
+                    <img src="../../assets/images/copy.png" height="20" width="20"></button>
             </span>
-           
+            </div>
         </div>
     </div>
     <div style="padding:15px;">
-      <div class="credentials-form">
-        <input class="signup-btn halfWidthBlueBtn" type="button" value="Ok" (click)="modalRef.hide();" />
-      </div>
+        <div class="credentials-form" style="text-align: center;">
+            <input class="signup-btn halfWidthBlueBtn" type="button" value="Ok" (click)="modalRef.hide();" />
+        </div>
     </div>
 </ng-template>
 
 <ng-template #tradingHistory style="width:500px;">
-        <div class="modal-header">
-          <h3 class="modal-title pull-left">Trading History</h3>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
+    <div class="modal-header">
+        <h3 class="modal-title pull-left">Trading History</h3>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="row margin-15">
+        <div class="col-xs-6">
+            Trading History ID
         </div>
-        <div class="row">
-           <div class="col-xs-6">
-                Trading History ID
-           </div>
-           <div class="col-xs-6">
-               {{txId}}
-           </div>
+        <div class="col-xs-6">
+            {{txId}}
         </div>
-        <div class="row">
-            <div class="col-xs-6">
-                Amount
-            </div>
-            <div class="col-xs-6">
-                {{amtSatoshis}}
-            </div>
+    </div>
+    <div class="row margin-15">
+        <div class="col-xs-6">
+            Amount
         </div>
-        <div class="row">
-             <div class="col-xs-6">
-                Price
-             </div>
-            <div class="col-xs-6">
-               {{price}}
-            </div>
+        <div class="col-xs-6">
+            {{amtSatoshis}}
         </div>
-        <div class="row">
-            <div class="col-xs-6">
-                Transaction Type
-            </div>
-            <div class="col-xs-6">
-               {{TxtnType}}
-            </div>
+    </div>
+    <div class="row margin-15">
+        <div class="col-xs-6">
+            Price
         </div>
-        <div class="row">
-                <div class="col-xs-6">
-                    Total Order Value
-                </div>
-                <div class="col-xs-6">
-                   {{totalOrderValue}}
-                </div>
+        <div class="col-xs-6">
+            {{price}}
         </div>
-        <div class="row">
-                <div class="col-xs-6">
-                    Timestamp
-                </div>
-                <div class="col-xs-6">
-                    {{timestamp}}
-                </div>
+    </div>
+    <div class="row margin-15">
+        <div class="col-xs-6">
+            Transaction Type
         </div>
-        <div style="padding:15px;">
-          <div class="credentials-form">
+        <div class="col-xs-6">
+            {{status}}
+        </div>
+    </div>
+    <div class="row margin-15">
+        <div class="col-xs-6">
+            Total Order Value
+        </div>
+        <div class="col-xs-6">
+            {{totalOrderValue}}
+        </div>
+    </div>
+    <div class="row margin-15">
+        <div class="col-xs-6">
+            Timestamp
+        </div>
+        <div class="col-xs-6">
+            {{timestamp}}
+        </div>
+    </div>
+    <div style="padding:15px;">
+        <div class="credentials-form" style="text-align: center;">
             <input class="signup-btn halfWidthBlueBtn" type="button" value="Ok" (click)="modalRef.hide();" />
-          </div>
         </div>
- </ng-template>
+    </div>
+</ng-template>
 
- <ng-template #INRHistory style="width:500px;">
-        <div class="modal-header">
-          <h3 class="modal-title pull-left">INR History</h3>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
+<ng-template #INRHistory style="width:500px;">
+    <div class="modal-header">
+        <h3 class="modal-title pull-left">INR History</h3>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="row margin-15">
+        <div class="col-xs-6">
+            Transaction ID
         </div>
-        <div class="row">
-                <div class="col-xs-6">
-                   Transaction ID
-                </div>
-                <div class="col-xs-6">
-                   {{txId}}
-                </div>
-             </div>
-             <div class="row">
-                 <div class="col-xs-6">
-                     Amount
-                 </div>
-                 <div class="col-xs-6">
-                    {{amtSatoshis}}
-                 </div>
-             </div>
-             <div class="row">
-                  <div class="col-xs-6">
-                     Remarks
-                  </div>
-                 <div class="col-xs-6">
-                     {{remarks}}
-                 </div>
-             </div>
-             <div class="row">
-                 <div class="col-xs-6">
-                     Transaction Type
-                 </div>
-                 <div class="col-xs-6">
-                     {{status}}
-                 </div>
-             </div>
-             <div class="row">
-                     <div class="col-xs-6">
-                        Timestamp
-                     </div>
-                     <div class="col-xs-6">
-                        {{timestamp}}
-                     </div>
-             </div>            
-        <div style="padding:15px;">
-          <div class="credentials-form">
+        <div class="col-xs-6">
+            {{txId}}
+        </div>
+    </div>
+    <div class="row margin-15">
+        <div class="col-xs-6">
+            Amount
+        </div>
+        <div class="col-xs-6">
+            {{amtSatoshis}}
+        </div>
+    </div>
+    <div class="row margin-15">
+        <div class="col-xs-6">
+            Remarks
+        </div>
+        <div class="col-xs-6">
+            {{remarks}}
+        </div>
+    </div>
+    <div class="row margin-15">
+        <div class="col-xs-6">
+            Transaction Type
+        </div>
+        <div class="col-xs-6">
+            {{status}}
+        </div>
+    </div>
+    <div class="row margin-15">
+        <div class="col-xs-6">
+            Timestamp
+        </div>
+        <div class="col-xs-6">
+            {{timestamp}}
+        </div>
+    </div>
+    <div style="padding:15px;">
+        <div class="credentials-form" style="text-align: center;">
             <input class="signup-btn halfWidthBlueBtn" type="button" value="Ok" (click)="modalRef.hide();" />
-          </div>
         </div>
- </ng-template>
-
+    </div>
+</ng-template>
