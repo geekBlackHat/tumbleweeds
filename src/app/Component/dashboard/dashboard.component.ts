@@ -17,10 +17,10 @@ export class DashboardComponent implements OnInit {
   buy : boolean;sell: boolean;
   coin: string = "BTC";
   buyPricePerBTC : any;
-  buyTotalValue : any;
+  buyTotalValue : any = 0;
   sellAmount : any;
   sellPricePerBTC : any;
-  sellTotalValue :any;
+  sellTotalValue :any = 0;
   TradeTitle : string;
   amount : any;
   perBtc : any;
@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit {
      if(this.buyAmount != undefined && this.buyPricePerBTC){
           this.amount = this.buyAmount;
           this.perBtc = this.buyPricePerBTC;
-          this.buyTotalValue = this.amount * this.perBtc;
+          this.buyTotalValue = (this.amount * this.perBtc).toFixed(2);;
       }
       else{
         this.buyTotalValue = 0;
@@ -128,7 +128,7 @@ export class DashboardComponent implements OnInit {
       if(this.sellAmount != undefined && this.sellPricePerBTC){
           this.sellBindAmount = this.sellAmount;
           this.sellBindperBtc = this.sellPricePerBTC;
-          this.sellTotalValue = this.sellBindAmount * this.sellBindperBtc;
+          this.sellTotalValue = (this.sellBindAmount * this.sellBindperBtc).toFixed(2);
       }
       else{
         this.sellTotalValue = 0;
