@@ -49,7 +49,7 @@
         <div class="col-sm-6">
             <div class="row sec-container">
                 <h5>INR History</h5>
-                <div class="row" *ngIf="INRhistory != null && INRhistory != undefined" style="height:300px; overflow-y: scroll; margin :20px">
+                <div class="row" class="scroller-base custom-scroller" *ngIf="INRhistory != null && INRhistory != undefined">
                         <div class="row" >
                             <div class="col-xs-6">
                                Amount
@@ -72,7 +72,7 @@
         <div class="col-sm-6">
             <div class="row sec-container">
                 <h5>BTC Transaction History</h5>               
-                <div class="row" *ngIf="withdrawBTCResultTransactions != null && withdrawBTCResultTransactions != undefined" style="height:300px; overflow-y: scroll; margin :20px">
+                <div class="row"   class="scroller-base custom-scroller" *ngIf="withdrawBTCResultTransactions != null && withdrawBTCResultTransactions != undefined" >
                     <div class="row" >
                         <div class="col-xs-6">
                            Amount
@@ -158,8 +158,8 @@
             <input class="signup-btn" type="button" value="Confirm" (click)="sendBTC()"  />
           </div>
         </div>
-        <div id="loader" *ngIf="withdrawBTCStatus ==1" style="height: 100px">
-            Test Loading...
+        <div id="loader" *ngIf="withdrawBTCStatus ==1" class="loaderStyle" >
+            <img src="../../assets/images/loader.gif" height="50" width="50">
         </div>
         <div id="result" *ngIf="withdrawBTCStatus ==2" class="credentials-form">
             <br/>
@@ -202,8 +202,8 @@
         <input class="signup-btn" type="button" value="Cancel" (click)="modalRef.hide();"  />
       </div>
     </div>   
-    <div id="loader" *ngIf="depositINRStatus == 1" style="height: 100px">
-            Test Loading...
+    <div id="loader" *ngIf="depositINRStatus == 1" class="loaderStyle">
+        <img src="../../assets/images/loader.gif" height="50" width="50">
     </div>
     <div id="result" *ngIf="depositINRStatus == 2" style="height: 100px; margin:30px">
         <div *ngIf="INRResult">
@@ -245,8 +245,8 @@
         <input class="signup-btn halfWidthTransperentBtn" type="button" value="Cancel" (click)="modalRef.hide();"  />
       </div>
     </div>
-    <div id="loader" *ngIf="withdrawINRStatus ==1" style="height: 100px">
-            Test Loading...
+    <div id="loader" *ngIf="withdrawINRStatus ==1" class="loaderStyle">
+            <img src="../../assets/images/loader.gif" height="50" width="50">
     </div>
     <div id="result" *ngIf="withdrawINRStatus ==2" style="height: 100px; margin:30px">
             <div *ngIf="INRResult">
