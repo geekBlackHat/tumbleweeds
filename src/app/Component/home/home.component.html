@@ -30,7 +30,7 @@
               <input #fnam="ngModel" required name="fname" autocomplete="off" type="text" placeholder="First Name"  [(ngModel)]="UserData.FirstName" />
             </div>
            
-              <div *ngIf="fnam.errors?.required" class="errorMsg">
+              <div *ngIf="fnam.errors?.required && isValidation" class="errorMsg">
                   First name is required
               </div>
           
@@ -38,15 +38,15 @@
               <input type="text" placeholder="Last Name" autocomplete="off" required name="lname" #lname="ngModel" [(ngModel)]="UserData.LastName" />
             </div>
           
-                <div *ngIf="lname.errors?.required" class="errorMsg">
+                <div *ngIf="lname.errors?.required && isValidation" class="errorMsg">
                     Last name is required
                 </div>
              
             <div>
-              <input type="email" #email="ngModel" required autocomplete="off" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email" [(ngModel)]="UserData.Email"  />
+              <input type="email" #email="ngModel" autocomplete="off" required name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email" [(ngModel)]="UserData.Email"  />
             </div>
            
-                <div *ngIf="email.errors?.required" class="errorMsg">
+                <div *ngIf="email.errors?.required && isValidation" class="errorMsg">
                     Please enter a email
                 </div>
                 <div *ngIf="email.errors && (email.dirty || email.touched)">
@@ -58,7 +58,7 @@
               <input type="password" #passwrd="ngModel" autocomplete="off" placeholder="Password" required name="password" minlength="8" [(ngModel)]="UserData.Password" />
             </div>
             
-                <div *ngIf="passwrd.errors?.required" class="errorMsg">
+                <div *ngIf="passwrd.errors?.required && isValidation" class="errorMsg">
                     Please enter a password
                 </div>
                 <div *ngIf="passwrd.errors && (passwrd.dirty || passwrd.touched)">
@@ -70,12 +70,12 @@
               <input type="number" placeholder="MobileNumber" autocomplete="off" name="mobile" required [(ngModel)]="UserData.MobileNumber" #mob="ngModel" maxlength="10" />
             </div>
          
-                <div *ngIf="mob.errors?.required" class="errorMsg">
+                <div *ngIf="mob.errors?.required && isValidation" class="errorMsg">
                     Please enter a mobile number
                 </div>
             
               <div *ngIf="signErrorFlag" > 
-                <label class="errorMsg"> {{signErrorLabel}}</label>
+              <!--  <label class="errorMsg"> {{signErrorLabel}}</label> -->
               </div>
             <div>
               <input class="signup-btn" type="submit" value="{{signUpButtonText}}" />
@@ -102,18 +102,24 @@
       <div>
         <input type="email" #emailId="ngModel" required autocomplete="off" name="emai" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email" [(ngModel)]="LoginData.Email" />
       </div>
-      <div *ngIf="emailId.errors && (emailId.dirty || emailId.touched)">
-          <div [hidden]="!emailId.errors.required" class="errorMsg">
+      
+          <div *ngIf="emailId.errors?.required && isValidateSignIn" class="errorMsg">
               Please enter a email
           </div>
+          <div *ngIf="emailId.errors && (emailId.dirty || emailId.touched)">
           <div [hidden]="!emailId.errors.pattern" class="errorMsg">
-              Please enter valid email id
+              Email id is required
           </div>
         </div><br />
-      <input type="password" placeholder="Password" name="password" autocomplete="off" [(ngModel)]="LoginData.Password" />
+        <div>
+          <input type="password" placeholder="Password" #passwor="ngModel" name="password" autocomplete="off" [(ngModel)]="LoginData.Password" />
+        </div>
+      <div *ngIf="passwor.errors?.required && isValidateSignIn" class="errorMsg">
+        Password is required
+      </div>
       <br />
       <div *ngIf="loginBool">
-       <label class="errorMsg">{{loginLabel}}</label>
+       <!--<label class="errorMsg">{{loginLabel}}</label> -->
       </div>
       <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
       <input class="signup-btn" type="submit" value="{{signInButtonText}}" />
