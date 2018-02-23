@@ -100,10 +100,29 @@ export class ProfileComponent implements OnInit {
   }
 
   openWithdrawalModal(template: TemplateRef<any>) {
+    this.txnWithdrawINR = {
+      userId:"",   
+      amount:"" ,
+      remarks:"",
+      type :"withdraw" 
+    };
+    
+  this.txnSendObject = {
+    userId:"",
+    destinationAddress:"",
+    amountSatoshis:"",
+    remarks:"",
+  };
     this.modalRef = this.modalService.show(template);  
   }
 
   openDepositModal(template: TemplateRef<any>) {
+    this.txnDepositINR = {
+      userId:"",   
+      amount:"" ,
+      remarks:"",
+      type:"deposit" 
+    };
     this.modalRef = this.modalService.show(template);
   }
 

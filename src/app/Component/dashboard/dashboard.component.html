@@ -200,3 +200,26 @@
     </div>
   </div>
 </ng-template>
+
+<ng-template #ConfirmMessage>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left"></h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+ <!-- <div id="loader" *ngIf="withdrawINRStatus ==1" style="height: 100px">
+          Loading...
+  </div>
+  <div id="result" *ngIf="withdrawINRStatus ==2" style="height: 100px; margin:30px">
+          <div *ngIf="INRResult">
+                  <img src="../../assets/images/checked.png" height="30" width="30">
+                  <span>SUCCESS</span>
+                  </div>  
+                  <br/>
+                  <div *ngIf="!INRResult">
+                  <img src="../../assets/images/error.png" height="30" width="30">
+                  <span>FAIL</span>
+                  </div> 
+  </div>  -->
+</ng-template>

@@ -28,6 +28,9 @@ export class HomeComponent implements OnInit {
   signUpPopUpMsg : string;
   signUpButtonText: string = "Sign Up";
 
+  isValidation : boolean = false;
+  isValidateSignIn : boolean = false;
+
  // pattern: "[^ @]*@[^ @]*";
   firstName:string;lastName:string;email:string;mobile:number;
  
@@ -47,6 +50,8 @@ export class HomeComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
     this.loginBool = false;
     this.signInButtonText = "Sign In";
+    this.isValidateSignIn = false;
+    this.isValidation = false;
     this.LoginData = {
       Email:'',Password:''
     }
@@ -55,15 +60,18 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-     
+       this.isValidation = false;
+       this.isValidateSignIn = false;
   }
 
   userRegistration(data :  any, template: TemplateRef<any>){
     if(!this.form.dirty || data.fname == "" || data.lname == "" || data.email == "" || data.mobile == "" || data.password == ""){
+      this.isValidation = true;
       this.signErrorLabel = "Please enter all data";
       this.signErrorFlag = true;
      return;
   }
+  this.isValidation = false;
   this.signErrorFlag = false;
   //console.log(data);
   console.log(this.UserData);
@@ -92,11 +100,13 @@ export class HomeComponent implements OnInit {
   Login(loginData){
     console.log(loginData);
     if(loginData.Email == "" || loginData.Password == ""){
+        this.isValidateSignIn = true;
         this.loginLabel = "Enter Login Credentials";
         this.loginBool = true;
         return;
     }
    // this.modalRef.hide();
+   this.isValidateSignIn = false;
    this.signInButtonText = "Signing In...";
    this.loginBool = false;
    
