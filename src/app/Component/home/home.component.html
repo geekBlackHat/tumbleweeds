@@ -29,26 +29,27 @@
             <div>
               <input #fnam="ngModel" required name="fname" autocomplete="off" type="text" placeholder="First Name"  [(ngModel)]="UserData.FirstName" />
             </div>
-            <div *ngIf="fnam.errors && (fnam.dirty || fnam.touched)">
-              <div [hidden]="!fnam.errors.required" class="errorMsg">
-                  Please enter a first name
+           
+              <div *ngIf="fnam.errors?.required" class="errorMsg">
+                  First name is required
               </div>
-            </div>
+          
             <div>
               <input type="text" placeholder="Last Name" autocomplete="off" required name="lname" #lname="ngModel" [(ngModel)]="UserData.LastName" />
             </div>
-            <div *ngIf="lname.errors && (lname.dirty || lname.touched)">
-                <div [hidden]="!lname.errors.required" class="errorMsg">
-                    Please enter a last name
+          
+                <div *ngIf="lname.errors?.required" class="errorMsg">
+                    Last name is required
                 </div>
-              </div>
+             
             <div>
               <input type="email" #email="ngModel" required autocomplete="off" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email" [(ngModel)]="UserData.Email"  />
             </div>
-            <div *ngIf="email.errors && (email.dirty || email.touched)">
-                <div [hidden]="!email.errors.required" class="errorMsg">
+           
+                <div *ngIf="email.errors?.required" class="errorMsg">
                     Please enter a email
                 </div>
+                <div *ngIf="email.errors && (email.dirty || email.touched)">
                 <div [hidden]="!email.errors.pattern" class="errorMsg">
                     Please enter valid email id
                 </div>
@@ -56,10 +57,11 @@
             <div>
               <input type="password" #passwrd="ngModel" autocomplete="off" placeholder="Password" required name="password" minlength="8" [(ngModel)]="UserData.Password" />
             </div>
-            <div *ngIf="passwrd.errors && (passwrd.dirty || passwrd.touched)">
-                <div [hidden]="!passwrd.errors.required" class="errorMsg">
+            
+                <div *ngIf="passwrd.errors?.required" class="errorMsg">
                     Please enter a password
                 </div>
+                <div *ngIf="passwrd.errors && (passwrd.dirty || passwrd.touched)">
                 <div [hidden]="!passwrd.errors.minlength" class="errorMsg">
                     Please enter atleast 8 characters
                 </div>
@@ -67,14 +69,11 @@
             <div>
               <input type="number" placeholder="MobileNumber" autocomplete="off" name="mobile" required [(ngModel)]="UserData.MobileNumber" #mob="ngModel" maxlength="10" />
             </div>
-            <div *ngIf="mob.errors && (mob.dirty || mob.touched)">
-                <div [hidden]="!mob.errors.required" class="errorMsg">
+         
+                <div *ngIf="mob.errors?.required" class="errorMsg">
                     Please enter a mobile number
                 </div>
-                <div [hidden]="!passwrd.errors.maxlength" class="errorMsg">
-                    Please enter atleast 10 digits
-                </div>
-              </div>
+            
               <div *ngIf="signErrorFlag" > 
                 <label class="errorMsg"> {{signErrorLabel}}</label>
               </div>

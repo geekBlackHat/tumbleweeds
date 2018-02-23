@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit {
   btcAddress : any;
   tradingHistory : any;
   INRhistory :any;
+  tradingHistoryData = [];
 
 
   amtSatoshis: any;
@@ -90,6 +91,9 @@ export class ProfileComponent implements OnInit {
       this.userProfile = res.userinfo[0];
       this.btcAddress = res.btcaddress[0];
       this.tradingHistory = res.tradinghistroy;
+      for(var i = 0; i < res.tradinghistroy.length; i++){
+           this.tradingHistoryData.push(res.tradinghistroy[i]);
+      }
       this.INRhistory = res.inrtransaction;
       this.withdrawBTCResultTransactions =res.BTCTransactionHistory
     });
