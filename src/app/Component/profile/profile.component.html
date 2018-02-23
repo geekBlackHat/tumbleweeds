@@ -106,7 +106,7 @@
                                        Type
                                     </div>
                                 </div>
-                                <div class="row" *ngFor="let transactiontrade of tradingHistory" (click)="TradeHistorytemplate(tradingHistory, transactiontrade); " >
+                                <div class="row" *ngFor="let transactiontrade of tradingHistoryData" (click)="TradeHistorytemplate(tradingHistory, transactiontrade);"  >
                                     <div class="col-xs-6">                                       
                                         {{transactiontrade.Amount}}
                                     </div>
