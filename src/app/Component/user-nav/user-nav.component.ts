@@ -13,6 +13,15 @@ export class UserNavComponent implements OnInit {
   }
 
   ngOnInit() {
+    var userid= localStorage.getItem('userID');
+    if(userid == null || userid == undefined)
+    {
+      this._router.navigateByUrl("/"); 
+    }
+    //else
+    //{
+    //  this._router.navigateByUrl("dashboard");
+    //}
   }
 
   cyptoDesk()

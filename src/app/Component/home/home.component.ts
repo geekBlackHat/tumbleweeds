@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     var checkUserID = localStorage.getItem('userID');
-    if(checkUserID == null && checkUserID == undefined)
+    if(checkUserID == null || checkUserID == undefined)
     {
       this.modalRef = this.modalService.show(template);
       this.loginBool = false;

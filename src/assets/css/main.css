@@ -94,7 +94,7 @@ input:-webkit-autofill {
 }
 
 .scroller-base{
-    height:300px; margin :20px; overflow-y: auto;  overflow-x: hidden;
+    max-height:300px; margin :20px; overflow-y: auto;  overflow-x: hidden;
 }
 
 .custom-scroller::-webkit-scrollbar-track
@@ -122,3 +122,11 @@ input:-webkit-autofill {
     display: inline;
 }
 
+.margin-15{
+    margin: 15px;
+}
+
+a:focus, a:hover {
+    color: #0f88f5;
+    text-decoration: underline;
+}

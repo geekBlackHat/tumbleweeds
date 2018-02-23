@@ -10,6 +10,8 @@ import { HttpModule } from '@angular/http';
 import { ApiCallsService } from './services/apiservice.service';
 import { DataService } from './services/dataservice.service';
 
+import {ExponentialStrengthPipe} from './Pipes/calc.component';
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { ProfileComponent } from './Component/profile/profile.component';
@@ -18,7 +20,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, DashboardComponent, ProfileComponent, UserNavComponent
+    AppComponent, HomeComponent, DashboardComponent, ProfileComponent, UserNavComponent, ExponentialStrengthPipe
   ],
   imports: [
     BrowserModule, FormsModule, HttpModule,ClipboardModule,RouterModule.forRoot([
