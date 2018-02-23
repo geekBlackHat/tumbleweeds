@@ -6,6 +6,7 @@ import { ApiCallsService } from '../../services/apiservice.service';
 import { DatePipe } from '@angular/common';
 import Clipboard from 'clipboard';
 import { TemplateParseResult } from '@angular/compiler';
+import { ExponentialStrengthPipe } from '../../Pipes/calc.component';
 
 @Component({
   selector: 'app-profile',
@@ -83,6 +84,11 @@ export class ProfileComponent implements OnInit {
   ngOnInit() { 
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#273548';
     this.elementRef.nativeElement.ownerDocument.body.style.color = '#fff';
+    this.getUserProfile();
+  }
+
+  getUserProfile()
+  {
     this.txnSendObject.userId = localStorage.getItem('userID');
     this.txnDepositINR.userId = localStorage.getItem('userID');
     this.txnWithdrawINR.userId = localStorage.getItem('userID');
@@ -153,7 +159,8 @@ export class ProfileComponent implements OnInit {
       this.depositINRStatus =2;
       console.log('INRData : ' + res); 
       this.INRResult = res.RecentTransaction;
-      this.INRhistory = res.inrtransaction;       
+      this.INRhistory = res.inrtransaction;
+      this.getUserProfile();       
     });
    }    
   }
@@ -168,10 +175,11 @@ export class ProfileComponent implements OnInit {
        this.withdrawINRStatus =2;
        console.log('INRData : ' + res); 
        this.INRResult = res.RecentTransaction;   
-       this.INRhistory = res.inrtransaction;    
+       this.INRhistory = res.inrtransaction; 
+       this.getUserProfile();   
      });
     }    
-  }
+  }  
   } 
   
 

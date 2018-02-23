@@ -55,6 +55,14 @@ export class ApiCallsService {
     //this.headers.append('Accept', 'application/json');
   }   
 
+  getItem(url: string): Observable<any> {
+    let finalUrl = this.baseurl + url;
+    return this.http.get(finalUrl).map((response: any) => {
+      console.log(response.json());
+      return response.json();
+    }).catch(this.handleError);
+  }
+
   getAllItems(url: string): Observable<any> {
    return this.http.get(url).map((response: any) => {
       console.log(response.json());

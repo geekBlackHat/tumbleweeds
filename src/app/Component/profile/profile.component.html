@@ -23,7 +23,7 @@
                 <h5>Balances</h5>
                 <div class="row">
                     <div class="col-xs-6">INR Balance</div>
-                    <div class="col-xs-6">Rs. 20000</div>
+                    <div class="col-xs-6">{{ userProfile == undefined ? 0 : userProfile.INRBalance  }}</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
@@ -36,7 +36,7 @@
                 <br/>
                 <div class="row">
                     <div class="col-xs-6">BTC Balance</div>
-                    <div class="col-xs-6">0.20000</div>
+                    <div class="col-xs-6">{{ userProfile == undefined ? 0 : userProfile.BTCBalance}}</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
@@ -142,6 +142,13 @@
             <br />
             <br /> Please only transfer Bitcoins to this wallet address. Sending any others coins/tokens may result into a loss
             and no wallet credit.
+
+            <br/>
+            <div class="row">
+                <div class="col-xs-12" style="text-align:center">
+                    <input class="signup-btn" type="button" value="Ok" (click)="modalRef.hide()" />
+                </div>
+            </div>  
         </div>
     </div>
 </ng-template>
@@ -164,7 +171,14 @@
             <br />
             <br /> Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back
             <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-            <input class="signup-btn" type="button" value="Confirm" (click)="sendBTC()" />
+            <div class="row">
+                <div class="col-xs-6">
+                        <input class="signup-btn" type="button" value="Confirm" (click)="sendBTC()" />
+                </div>
+                <div class="col-xs-6">
+                        <input class="signup-btn halfWidthTransperentBtn" style="border:1px solid #337ab7" type="button" value="Cancel" (click)="modalRef.hide();" />
+                </div>
+            </div>
         </div>
     </div>
     <div id="loader" *ngIf="withdrawBTCStatus ==1" class="loaderStyle">
@@ -207,8 +221,14 @@
             <!-- <label ng-show="depositINRError"> Amount is required. </label><br />  -->
             <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
             <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-            <input class="signup-btn" type="button" value="Submit" (click)="transactionINR(txnDepositINR,'deposit')" />
-            <input class="signup-btn" type="button" value="Cancel" (click)="modalRef.hide();" />
+            <div class="row">
+                <div class="col-xs-6">
+                    <input class="signup-btn" type="button" value="Submit" (click)="transactionINR(txnDepositINR,'deposit')" />
+                </div>
+                <div class="col-xs-6">
+                    <input class="signup-btn halfWidthTransperentBtn" style="border:1px solid #337ab7" type="button" value="Cancel" (click)="modalRef.hide();" />
+                </div>  
+            </div>
         </div>
     </div>
     <div id="loader" *ngIf="depositINRStatus == 1" class="loaderStyle">
@@ -248,12 +268,23 @@
 
             <!-- <label ng-show="withdrawINRError"> Amount is required. </label><br />     -->
 
-            <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
-            <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
-            <input class="signup-btn halfWidthBlueBtn" type="button" value="Submit" (click)="transactionINR(txnWithdrawINR,'withdraw')"
-            />
-            <input class="signup-btn halfWidthTransperentBtn" type="button" value="Cancel" (click)="modalRef.hide();" />
-        </div>
+
+       <!-- <label ng-show="withdrawINRError"> Amount is required. </label><br />     -->
+        
+        <!-- Please verify the destination wallet address. Once submitted, the withdrawal request cannot be reverted back -->
+        <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
+        <div class="row">
+            <div class="col-xs-6">
+                <input class="signup-btn halfWidthBlueBtn" type="button" value="Submit" (click)="transactionINR(txnWithdrawINR,'withdraw')"
+                />
+            </div>
+            <div class="col-xs-6">
+                <input class="signup-btn halfWidthTransperentBtn" style="border:1px solid #337ab7" type="button" value="Cancel" (click)="modalRef.hide();" />
+            </div>
+        </div>       
+        
+      </div>
+
     </div>
     <div id="loader" *ngIf="withdrawINRStatus ==1" class="loaderStyle">
         <img src="../../assets/images/loader.gif" height="50" width="50">
