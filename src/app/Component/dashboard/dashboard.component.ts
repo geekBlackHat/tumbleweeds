@@ -28,6 +28,8 @@ export class DashboardComponent implements OnInit {
   sellBindperBtc : any;
   buyErrorLabel : string;
   sellErrorLabel : string;
+  tradingHistory : Array<any> = [];
+  koinexData : any;
 
   tickerAPIResults : any = {
     buyOrders : [
@@ -40,6 +42,13 @@ export class DashboardComponent implements OnInit {
   userId : any;
   stockQuote: any;
   sub: Subscription;
+  tickerAPISorted : any = {
+    "buyOrders" : [],
+    "sellOrders" : []
+  }
+
+  userBuyOrders = [];
+  userSellOrders = [];
 
   constructor(private _router: Router, private httpCalls: ApiCallsService, private elementRef: ElementRef, private modalService: BsModalService, private ApiCallsService: ApiCallsService) {
     
@@ -47,6 +56,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#273548';
+    this.userId = localStorage.getItem('userID');
     this.httpCalls.getAllItems('http://xrp-backend-tumbleweed-backend.7e14.starter-us-west-2.openshiftapps.com/pingAPI').subscribe(
       res => {
         console.log(res);
@@ -56,8 +66,33 @@ export class DashboardComponent implements OnInit {
       .subscribe(quote => {
         this.tickerAPIResults = quote;
         console.log("socket res", quote);
-      });
-    this.userId = localStorage.getItem('userID');
+        this.tickerAPISorted.buyOrders = this.shortTickerArray(this.tickerAPIResults.buyOrders);
+        this.tickerAPISorted.sellOrders = this.shortTickerArray(this.tickerAPIResults.sellOrders);
+        this.userBuyOrders = [];
+        for (let i = 0; i < this.tickerAPIResults.buyOrders.length; i++){
+          if (this.tickerAPIResults.buyOrders[i].userID == this.userId){
+            this.userBuyOrders.push(this.tickerAPIResults.buyOrders[i]);
+          }
+        }
+        this.userSellOrders = [];
+        for (let i = 0; i < this.tickerAPIResults.sellOrders.length; i++) {
+          if (this.tickerAPIResults.sellOrders[i].userID == this.userId) {
+            this.userSellOrders.push(this.tickerAPIResults.sellOrders[i]);
+          }
+        }
+        this.userBuyOrders = this.shortTickerArray(this.userBuyOrders);
+        this.userSellOrders = this.shortTickerArray(this.userSellOrders);
+    });
+    
+    this.getTradingHistory();
+    this.tickerKoinex();
+    this.emitSocketEvent();
+  }
+
+  emitSocketEvent(){
+    this.ApiCallsService.getItem('/emitSocketEvent').subscribe(res => {
+      console.log(res);
+    });
   }
 
   profile(){
@@ -125,4 +160,41 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  getTradingHistory(){
+    var data = {
+      "userid": this.userId
+    }
+
+    this.ApiCallsService.postData(data, '/getTradingHistory').subscribe(res => {
+      console.log(res);
+      this.tradingHistory = res.tradinghistory;
+    });
+  }
+
+  tickerKoinex(){
+    this.ApiCallsService.getAllItems('https://koinex.in/api/ticker').subscribe(res => {
+      console.log(res);
+      this.koinexData = res;
+    });
+  }
+
+  cancelOrder(order, txType){
+    console.log(order);
+    order['txType'] = txType;
+    this.ApiCallsService.postData(order, '/cancelOrder').subscribe(res => {
+      console.log(res);
+      //this.tradingHistory = res.tradinghistory;
+    });
+  }
+
+  shortTickerArray (buyOrders) {
+    for (var i = 0; i < buyOrders.length - 1; i++) {
+      if ((buyOrders[i].price == buyOrders[i + 1].price)) {
+        buyOrders[i].amount = parseFloat(buyOrders[i].amount) + parseFloat(buyOrders[i + 1].amount)
+        buyOrders.splice(i + 1, 1);
+        return this.shortTickerArray(buyOrders);
+      }
+    }
+    return buyOrders;
+  }
 }

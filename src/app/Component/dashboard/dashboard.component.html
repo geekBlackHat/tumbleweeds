@@ -52,15 +52,21 @@
       <h4 align="center">Pending Orders</h4>
       <div>
         <div style="min-height:97px;">
-          <div class="row">
-            <div class="col-xs-4 col-mod-5">0.0023 BTC</div>
-            <div class="col-xs-4 col-mod-5" style="text-align:center;"> Rs.130000</div>
-            <div class="col-xs-4 col-mod-5" style="text-align:right;"> cancel</div>
+          <div>Buy Orders</div>
+          <div *ngFor="let trade of userBuyOrders">
+            <div class="row" *ngIf="trade.userID == userId" >            
+              <div class="col-xs-4 col-mod-5">{{trade.amount}} BTC</div>
+              <div class="col-xs-4 col-mod-5" style="text-align:center;"> {{trade.price}}</div>
+              <div class="col-xs-4 col-mod-5" style="text-align:right;" (click)="cancelOrder(trade, 'buy')"> cancel</div>
+            </div>
           </div>
-          <div class="row">
-            <div class="col-xs-4 col-mod-5">0.0023 BTC</div>
-            <div class="col-xs-4 col-mod-5" style="text-align:center;"> Rs.130000</div>
-            <div class="col-xs-4 col-mod-5" style="text-align:right;"> cancel</div>
+          <div>Sell Orders</div>
+          <div *ngFor="let trade of userSellOrders">
+            <div class="row" *ngIf="trade.userID == userId">
+              <div class="col-xs-4 col-mod-5">{{trade.amount}} BTC</div>
+              <div class="col-xs-4 col-mod-5" style="text-align:center;"> {{trade.price}}</div>
+              <div class="col-xs-4 col-mod-5" style="text-align:right;" (click)="cancelOrder(trade, 'sell')"> cancel</div>
+            </div>
           </div>
         </div>
         <div>
@@ -82,7 +88,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let trade of tickerAPIResults.buyOrders; let i = index;" [ngClass]="{'tr-odd':(i%2 != 0)}">
+          <tr *ngFor="let trade of tickerAPISorted.buyOrders; let i = index;" [ngClass]="{'tr-odd':(i%2 != 0)}">
             <td style="width:50%">{{trade.amount}}</td>
             <td style="width:50%">{{trade.price}}</td>
           </tr>
@@ -100,7 +106,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let trade of tickerAPIResults.sellOrders; let i = index" [ngClass]="{'tr-odd':(i%2 != 0)}">
+          <tr *ngFor="let trade of tickerAPISorted.sellOrders; let i = index" [ngClass]="{'tr-odd':(i%2 != 0)}">
             <td style="width:50%">{{trade.amount}}</td>
             <td style="width:50%">{{trade.price}}</td>
           </tr>
@@ -136,9 +142,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let trade of tickerAPIResults.buy_orders; let i = index" [ngClass]="{'tr-odd':(i%2 != 0)}">
-            <td style="width:50%">{{trade.vol}}</td>
-            <td style="width:50%">{{trade.price}}</td>
+          <tr *ngFor="let trade of tradingHistory; let i = index" [ngClass]="{'tr-odd':(i%2 != 0)}">
+            <td style="width:50%"><span style="text-transform:capitalize">{{trade.TxtnType}}</span> <span>{{trade.Amount}}</span></td>
+            <td style="width:50%">{{trade.Price}}</td>
           </tr>
         </tbody>
       </table>
