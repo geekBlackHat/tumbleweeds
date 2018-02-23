@@ -118,8 +118,8 @@
         Password is required
       </div>
       <br />
-      <div *ngIf="loginBool">
-       <!--<label class="errorMsg">{{loginLabel}}</label> -->
+      <div *ngIf="isUserNotExist">
+       <label class="errorMsg">{{userNotExist}}</label> 
       </div>
       <!-- <a style="float:right;margin-right:15px;" (click)="forgetPassword()">Forget Password?</a><br /> -->
       <input class="signup-btn" type="submit" value="{{signInButtonText}}" />
