@@ -144,6 +144,9 @@ export class DashboardComponent implements OnInit {
     }
 
     this.ApiCallsService.postData(buyBTCObj, '/buyBTC').subscribe(res => {
+     this.buyAmount='';
+     this.buyPricePerBTC = ''; this.buyTotalValue = 0;
+      this.modalRef.hide();
       console.log(res);
     });
   }
@@ -156,6 +159,9 @@ export class DashboardComponent implements OnInit {
     }
 
     this.ApiCallsService.postData(sellBTCObj, '/sellBTC').subscribe(res => {
+      this.sellAmount = '';
+      this.sellPricePerBTC = '';this.sellTotalValue = 0;
+      this.modalRef.hide();
       console.log(res);
     });
   }

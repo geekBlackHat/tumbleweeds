@@ -43,7 +43,7 @@
                 </div>
              
             <div>
-              <input type="email" #email="ngModel" autocomplete="off" required name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email" [(ngModel)]="UserData.Email"  />
+              <input type="email" #email="ngModel" autocomplete="off" required [ngModelOptions]="{standalone: true}" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email" [(ngModel)]="UserData.Email"  />
             </div>
            
                 <div *ngIf="email.errors?.required && isValidation" class="errorMsg">

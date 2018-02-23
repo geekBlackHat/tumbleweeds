@@ -70,6 +70,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.UserData = {
+      FirstName:'',
+      LastName:'',Email:'',MobileNumber:'',Password:''
+    }
        this.isValidation = false;
        this.isValidateSignIn = false;
   }
@@ -93,6 +97,9 @@ export class HomeComponent implements OnInit {
             this.signUpPopUpMsg = "User registration completed. Now, Log In!!";
             this.signUpPopUpTitle = "Success";
             this.form.reset();
+            this.UserData = {
+              Email:''
+            };
             this.modalRef = this.modalService.show(template);
             this.signUpButtonText = "Sign Up";
         }
@@ -100,6 +107,9 @@ export class HomeComponent implements OnInit {
            this.signUpPopUpMsg = "Somthing went wrong please try after sometime";
            this.signUpPopUpTitle = "Error";
            this.signUpButtonText = "Sign Up";
+           this.UserData = {
+            Email:''
+          };
            this.form.reset();
            this.modalRef = this.modalService.show(template);
            console.log(logs);

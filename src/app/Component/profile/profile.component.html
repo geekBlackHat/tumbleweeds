@@ -54,15 +54,15 @@
             <div class="row sec-container">
                 <h5>INR History</h5>
                 <div class="row" class="scroller-base custom-scroller" *ngIf="INRhistory != null && INRhistory != undefined">
-                    <div class="row">
-                        <div class="col-xs-6">
+                    <div class="row" style=" margin-left:0px">
+                        <div class="col-xs-6" style="color: #f9672d;">
                             Amount
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-6" style="color: #f9672d;">
                             Type
                         </div>
                     </div>
-                    <div class="row" *ngFor="let transaction of INRhistory" (click)="INRHistorytemplate(INRHistory, transaction); ">
+                    <div class="row" style="margin-left:2px" *ngFor="let transaction of INRhistory" (click)="INRHistorytemplate(INRHistory, transaction); ">
                         <div class="col-xs-6">
                             {{transaction.Amount}}
                         </div>
@@ -77,15 +77,15 @@
             <div class="row sec-container">
                 <h5>BTC Transaction History</h5>
                 <div class="row" class="scroller-base custom-scroller" *ngIf="withdrawBTCResultTransactions != null && withdrawBTCResultTransactions != undefined">
-                    <div class="row">
-                        <div class="col-xs-6">
+                    <div class="row" style="margin-left:0px">
+                        <div class="col-xs-6" style="color: #f9672d;">
                             Amount
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-6" style="color: #f9672d;">
                             Status
                         </div>
                     </div>
-                    <div class="row" *ngFor="let transaction of withdrawBTCResultTransactions" (click)="history(transactionHistory, transaction); ">
+                    <div class="row" style="margin-left:2px" *ngFor="let transaction of withdrawBTCResultTransactions" (click)="history(transactionHistory, transaction); ">
                         <div class="col-xs-6">
                             {{transaction.amtSatoshis}}
                         </div>
@@ -101,16 +101,16 @@
         <div class="col-sm-12">
             <div class="row sec-container">
                 <h5>Trading History</h5>
-                <div class="row" class="scroller-base custom-scroller" *ngIf="tradingHistory != null && tradingHistory != undefined">
-                    <div class="row">
-                        <div class="col-xs-6">
+                <div class="row"  class="scroller-base custom-scroller" *ngIf="tradingHistory != null && tradingHistory != undefined">
+                    <div class="row" style="margin-left:0px">
+                        <div class="col-xs-6" style="color: #f9672d;">
                             Amount
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-6" style="color: #f9672d;">
                             Type
                         </div>
                     </div>
-                    <div class="row" *ngFor="let transactiontrade of tradingHistoryData" (click)="TradeHistorytemplate(tradingHistory, transactiontrade);">
+                    <div class="row" style="margin-left:2px"  *ngFor="let transactiontrade of tradingHistoryData" (click)="TradeHistorytemplate(tradingHistory, transactiontrade);">
                         <div class="col-xs-6">
                             {{transactiontrade.Amount}}
                         </div>
