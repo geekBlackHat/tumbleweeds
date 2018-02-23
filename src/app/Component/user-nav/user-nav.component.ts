@@ -14,8 +14,23 @@ export class UserNavComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  cyptoDesk()
+  {
+    //localStorage.removeItem('userID');
+    this._router.navigateByUrl("/"); 
+  }
   
   profile() {
     this._router.navigateByUrl("profile");
+  }
+  signOut(){
+    localStorage.removeItem('userID');
+    this._router.navigateByUrl("/");
+  }
+
+  dashboard()
+  {
+    this._router.navigateByUrl("dashboard");
   }
 }
