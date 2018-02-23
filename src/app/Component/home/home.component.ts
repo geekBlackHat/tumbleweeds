@@ -44,13 +44,19 @@ export class HomeComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-    this.loginBool = false;
-    this.signInButtonText = "Sign In";
-    this.LoginData = {
-      Email:'',Password:''
+    var checkUserID = localStorage.getItem('userID');
+    if(checkUserID == null && checkUserID == undefined)
+    {
+      this.modalRef = this.modalService.show(template);
+      this.loginBool = false;
+      this.signInButtonText = "Sign In";
+      this.LoginData = {
+        Email:'',Password:''
+      }
     }
-    
+    else{
+      this._route.navigateByUrl('dashboard');
+    }    
    // this.tform.reset();
   }
 
